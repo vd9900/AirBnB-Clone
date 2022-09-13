@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>house</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+</head>
+<!-- Basic style -->
+<style>
+    .img-container {
+        margin: 20px auto;
+        position: relative;
+    }
+
+    .btn-container {
+        position: absolute;
+        text-align: center;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 10px;
+        top: 42%;
+        width: 100%;
+    }
+
+    .img-container>img {
+        height: 400px;
+        width: 100%;
+        display: block;
+        margin: auto;
+        padding-bottom: 20px;
+    }
+
+    .btn-container>button {
+        outline: none;
+        width: 40px;
+        height: 40px;
+        border: none;
+        background-color: rgb(25, 121, 211);
+        border-radius: 50%;
+        color: white;
+        cursor: pointer;
+    }
+
+    .btn-container>button:last-child {
+        margin: 0 50px 0 0;
+    }
+</style>
+
+<body>
+    <section>
+
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
+                <span><a href="#" class="text-decoration-none text-primary fs-3">AirBnB</a></span>
+                <div class="ms-auto me-3">
+                    <span class="w-70 me-3"><a href="">Become a hoster</a></span>
+                    <span class="w-70 me-3">Welcome Vinith</span>
+                    <button type="button" class="btn btn-outline-primary">Edit Profile</button>
+                </div>
+            </div>
+        </nav>
+        <div class="p-3">
+            <!-- post component -->
+            <div style="width:76vw;" class="bg-light m-auto px-3">
+                <!-- post title -->
+                <h1>big house here</h1>
+                <!-- place -->
+                <h3>Mumbai, India</h3>
+                <!-- imgs -->
+                <div style="width:700px;" id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="https://th.bing.com/th/id/OIP.xmc9vpdxmqD2SLr-WUZtzAHaEo?pid=ImgDet&rs=1"
+                                class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://th.bing.com/th/id/OIP.qLVYj_t-HU2Yyx3v_wFgLwHaE6?w=283&h=188&c=7&r=0&o=5&dpr=1.25&pid=1.7"
+                                class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://th.bing.com/th/id/OIP.xmc9vpdxmqD2SLr-WUZtzAHaEo?pid=ImgDet&rs=1"
+                                class="d-block w-100" alt="...">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                <!--  tumbmail -->
+                <h2 class="my-4">Luxury stay in Baa Atoll, North Province, Maldives</h2>
+
+                <!--  guests, bedrooms beds bathrooms -->
+                <div class="">
+                    <!-- guests -->
+                    <span class="mx-2">12-guests</span>
+                    <!-- bedrooms -->
+                    <span>6-bedrooms</span>
+                    <!-- beds -->
+                    <span class="mx-2">6-beds</span>
+                    <!-- bathrooms -->
+                    <span>6-bathrooms</span>
+                </div>
+                <!-- ratings -->
+                <div class="my-3 fs-3">
+                    Rating: 4.3/5
+                </div>
+
+                <!-- Amenities -->
+                <h4>Amenities</h4>
+                <div class="d-flex gap-3">
+                    <!-- outdoor -->
+                    <ul class="list-group">
+                        <li class="list-group-item bg-dark text-light fw-bold" aria-current="true">Outdoor</li>
+                        <li class="list-group-item">A second item</li>
+                        <li class="list-group-item">A third item</li>
+                        <li class="list-group-item">A fourth item</li>
+                        <li class="list-group-item">And a fifth one</li>
+                      </ul>
+                    <!-- indoor -->
+                    <ul class="list-group">
+                        <li class="list-group-item bg-dark text-light fw-bold" aria-current="true">Indoor</li>
+                        <li class="list-group-item">A second item</li>
+                        <li class="list-group-item">A third item</li>
+                        <li class="list-group-item">A fourth item</li>
+                        <li class="list-group-item">And a fifth one</li>
+                      </ul>
+                    <!-- Essentials -->
+                    <ul class="list-group">
+                        <li class="list-group-item bg-dark text-light fw-bold" aria-current="true">Essentials</li>
+                        <li class="list-group-item">A second item</li>
+                        <li class="list-group-item">A third item</li>
+                        <li class="list-group-item">A fourth item</li>
+                        <li class="list-group-item">And a fifth one</li>
+                      </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Properties UI -->
+
+    </section>
+    <!-- Javascript code for next and previous button -->
+    <script>
+        let images = [
+            'https://codelearningpoint.com/uploads/1627415311.jpg',
+            'https://codelearningpoint.com/uploads/1627415323.jpg',
+            'https://codelearningpoint.com/uploads/1627415302.jpg'
+        ];
+        let imageTag = document.querySelector('.imageTag');
+        let i = 0;
+
+
+        function next() {
+            if (i >= images.length - 1) {
+                return false;
+            }
+            i++;
+            imageTag.setAttribute('src', images[i]);
+        }
+        function previous() {
+            if (i <= 0) {
+                return false;
+            }
+            i--;
+            imageTag.setAttribute('src', images[i]);
+        }
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
