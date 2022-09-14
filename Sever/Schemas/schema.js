@@ -1,2 +1,1 @@
-import { Express } from "express";
-console.log("ljalsfj");
+const mongoose = require("mo")
