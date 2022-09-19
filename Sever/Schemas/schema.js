@@ -109,3 +109,4 @@ const roomsdetailschema = new mongoose.Schema({
 
 })
 const HostedRoomDetails = new mongoose.model("Hostedroomdetails",roomsdetailschema)
+
