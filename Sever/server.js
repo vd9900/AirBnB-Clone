@@ -12,7 +12,7 @@ app.use("/", appRouter)
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, '../views/index.html'));
 });
-app.get('/home', function (req, res) {
+app.get('/home', function (req res) {
   res.sendFile(path.join(__dirname, '../views/home.html'));
 });
 // home page
@@ -22,7 +22,7 @@ app.get('/home', function (req, res) {
 // appRouter.route("/login").get(loginGET).post(loginPOST)
 // appRouter.route("/signin").post(signinPOST)
 app.post("/signin", (req, res) => {
-  
+
   res.redirect("/home")
 })
 
