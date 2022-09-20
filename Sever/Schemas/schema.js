@@ -4,17 +4,20 @@ const userDetailSchema = new mongoose.Schema({
     name: {
         type: String
     },
-    userName: {
+    userId: {
         type: String
     },
     email: {
         type: String
     },
+    phone: {
+        type: Number
+    },
     password: {
         type: String
     },
-    age: {
-        type: Number
+    userType: {
+        type: String
     },
     dob: {
         type: Date,
@@ -32,14 +35,25 @@ const userDetailSchema = new mongoose.Schema({
         data: Buffer,
         contentType: String
     },
-    time: {
+    address:{
+        street:{
+            type:String
+        },
+        city:{
+            type:String
+        },
+        country:{
+            type:String
+        }
+    },
+    updated: {
         type: Date,
         default: Date.now
     }
 
 })
 
-const UserDeatail = mongoose.model("UserDetail", userDetailSchema)
+const UserDetail = mongoose.model("UserDetail", userDetailSchema)
 
 const roomsdetailschema = new mongoose.Schema({
     propertyId: {
@@ -70,7 +84,7 @@ const roomsdetailschema = new mongoose.Schema({
     },
     roomImage: {
         data: Buffer,
-        contentType:String
+        contentType: String
     },
     total: {
         Bedrooms: {
@@ -93,20 +107,21 @@ const roomsdetailschema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    amenities:{
-        indoor:{
-            type:[]
+    amenities: {
+        indoor: {
+            type: []
         },
-        outdoor:{
-            type:[]
+        outdoor: {
+            type: []
         },
-        essentials:{
-            type:[]
+        essentials: {
+            type: []
         }
     }
 
 
 
 })
-const HostedRoomDetails = new mongoose.model("Hostedroomdetails",roomsdetailschema)
+const HostedRoomDetails = new mongoose.model("Hostedroomdetails", roomsdetailschema)
 
+module.exports = { UserDetail }
