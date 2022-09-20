@@ -25,7 +25,7 @@ app.get('/home', function (req, res) {
   res.sendFile(path.join(__dirname, '../views/home.html'));
 });
 // home page
-// appRouter.route("/").get(homeGET
+// appRouter.route("/").get(homeGET()
 
 // // SignUp & Login page
 // appRouter.route("/login").get(loginGET).post(loginPOST)
