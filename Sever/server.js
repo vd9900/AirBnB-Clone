@@ -69,7 +69,7 @@ app.post("/hoster",(req,res)=>{
   res.send("Thank you for joining us, we wish you mar Ja")
 })
 
-//Product page
+//Product pag
 // appRouter.route("/product").get(productGET)
 app.get("/product",(req,res)=>{
   res.sendFile(path.join(__dirname,"../views/product.html"))
