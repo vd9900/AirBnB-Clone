@@ -46,7 +46,6 @@ app.post("/signin", (req, res) => {
       country: req.body.country
     }
   })
-  console.log(Date.parse(req.body.dob));
   // NewUserDetail.save((err, docs) => {
   //   if (err) {
   //     res.send("please try again later")
@@ -64,17 +63,27 @@ app.get("/hoster",(req,res)=>{
   res.sendFile(path.join(__dirname,"../views/hoster.html"))
 })
 app.post("/hoster",(req,res)=>{
+  console.log(req.body.indoor);
+  console.log(req.body.outdoor);
+  console.log(req.body.essentials);
   res.send("Thank you for joining us, we wish you mar Ja")
 })
 
 //Product page
 // appRouter.route("/product").get(productGET)
+app.get("/product",(req,res)=>{
+  res.sendFile(path.join(__dirname,"../views/product.html"))
+})
+
+
 
 //contact page
 // appRouter.route("/contact").get(contactGET)
 
 // Admin page
 // appRouter.route("/Admin").get(adminGET)
+
+
 
 function signinPOST(req, res) {
   res.send(req.body);

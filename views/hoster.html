@@ -12,7 +12,7 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
-            <span><a href="#" class="text-decoration-none text-danger fs-2">AirBnB</a></span>
+            <span><a href="http://localhost:4000/" class="text-decoration-none text-danger fs-2">AirBnB</a></span>
             <div class="ms-auto me-3">
                 <span class="w-70 me-3">Welcome Vinith</span>
                 <button type="button" class="btn btn-outline-primary">Edit Profile</button>
@@ -27,7 +27,7 @@
         <form action="/hoster" method="post" class="row g-3 w-75">
             <div class="col-6">
                 <label for="inputEmail4" class="form-label">Name of the property</label>
-                <input type="text" class="form-control" id="inputEmail4">
+                <input type="text" class="form-control" name="propertyName" id="inputEmail4">
             </div>
 
             <div class="mb-3">
@@ -37,28 +37,28 @@
 
             <div class="col-3">
                 <label for="inputAddress" class="form-label">guest</label>
-                <input type="number" class="form-control" id="inputAddress">
+                <input type="number" class="form-control" name="totalGuest"  id="inputAddress">
             </div>
             <div class="col-3">
                 <label for="inputAddress" class="form-label">Beds</label>
-                <input type="number" class="form-control" id="inputAddress">
+                <input type="number" class="form-control" name="totalBeds" id="inputAddress">
             </div>
             <div class="col-3">
                 <label for="inputAddress" class="form-label">bedrooms</label>
-                <input type="number" class="form-control" id="inputAddress">
+                <input type="number" class="form-control"  name="totalBedrooms"  id="inputAddress">
             </div>
             <div class="col-3">
                 <label for="inputAddress" class="form-label">bathrooms</label>
-                <input type="number" class="form-control" id="inputAddress">
+                <input type="number" class="form-control" name="totalBathrooms"  id="inputAddress">
             </div>
 
             <div class="col-4">
                 <label for="inputEmail4" class="form-label"> Size/Area(in square feet/meter)</label>
-                <input type="number" class="form-control" id="inputEmail4">
+                <input type="number" class="form-control" name="size" id="inputEmail4">
             </div>
 
             <div class="form-floating">
-                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+                <textarea class="form-control" placeholder="Leave a comment here" name="description" id="floatingTextarea2"
                     style="height: 100px"></textarea>
                 <label for="floatingTextarea2">Place Description</label>
             </div>
@@ -70,39 +70,39 @@
                     <div class="container row">
 
                         <div class="form-check col-3">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <input class="form-check-input" type="checkbox" name="indoor"  value="Kitchen" id="flexCheckDefault">
                             <label class="form-check-label" for="flexCheckDefault">
-                                Default checkbox
+                                Kitchen
                             </label>
                         </div>
                         <div class="form-check col-3">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <input class="form-check-input" type="checkbox" name="indoor"  value="Smoking" id="flexCheckDefault">
                             <label class="form-check-label" for="flexCheckDefault">
-                                Default checkbox
+                                Smoking
                             </label>
                         </div>
                         <div class="form-check col-3">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <input class="form-check-input" type="checkbox" name="indoor"  value="Pets" id="flexCheckDefault">
                             <label class="form-check-label" for="flexCheckDefault">
-                                Default checkbox
+                                Pets
                             </label>
                         </div>
                         <div class="form-check col-3">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <input class="form-check-input" type="checkbox" name="indoor"  value="Building staff" id="flexCheckDefault">
                             <label class="form-check-label" for="flexCheckDefault">
-                                Default checkbox
+                                Building staff
                             </label>
                         </div>
                         <div class="form-check col-3">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <input class="form-check-input" type="checkbox" name="indoor"  value="dining table" id="flexCheckDefault">
                             <label class="form-check-label" for="flexCheckDefault">
-                                Default checkbox
+                                dining table
                             </label>
                         </div>
                         <div class="form-check col-3">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <input class="form-check-input" type="checkbox" name="indoor"  value="Big hall" id="flexCheckDefault">
                             <label class="form-check-label" for="flexCheckDefault">
-                                Default checkbox
+                                Big hall
                             </label>
                         </div>
                     </div>
@@ -115,39 +115,39 @@
                     <div class="container row">
 
                         <div class="form-check col-3">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <input class="form-check-input" type="checkbox"  name="outdoor" value="Private patio or balcony" id="flexCheckDefault">
                             <label class="form-check-label" for="flexCheckDefault">
-                                Default checkbox
+                                Private patio or balcony
                             </label>
                         </div>
                         <div class="form-check col-3">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <input class="form-check-input" type="checkbox" name="outdoor" value="garden" id="flexCheckDefault">
                             <label class="form-check-label" for="flexCheckDefault">
-                                Default checkbox
+                                garden
                             </label>
                         </div>
                         <div class="form-check col-3">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <input class="form-check-input" type="checkbox" name="outdoor" value="playground" id="flexCheckDefault">
                             <label class="form-check-label" for="flexCheckDefault">
-                                Default checkbox
+                                playground
                             </label>
                         </div>
                         <div class="form-check col-3">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <input class="form-check-input" type="checkbox" name="outdoor"  value="swimmingpool" id="flexCheckDefault">
                             <label class="form-check-label" for="flexCheckDefault">
-                                Default checkbox
+                                swimmingpool
                             </label>
                         </div>
                         <div class="form-check col-3">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <input class="form-check-input" type="checkbox" name="outdoor" value="BBQ grill" id="flexCheckDefault">
                             <label class="form-check-label" for="flexCheckDefault">
-                                Default checkbox
+                                BBQ grill
                             </label>
                         </div>
                         <div class="form-check col-3">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <input class="form-check-input" type="checkbox"  name="outdoor"  value="parking" id="flexCheckDefault">
                             <label class="form-check-label" for="flexCheckDefault">
-                                Default checkbox
+                                parking
                             </label>
                         </div>
                     </div>
@@ -159,39 +159,39 @@
                     <div class="container row">
                         
                         <div class="form-check col-3">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <input class="form-check-input" type="checkbox" name="essentials" value="Wi-Fi" id="flexCheckDefault">
                             <label class="form-check-label" for="flexCheckDefault">
-                                Default checkbox
+                                Wi-Fi
                             </label>
                         </div>
                         <div class="form-check col-3">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <input class="form-check-input" type="checkbox" name="essentials" value="AC" id="flexCheckDefault">
                             <label class="form-check-label" for="flexCheckDefault">
-                                Default checkbox
+                                AC
                             </label>
                         </div>
                         <div class="form-check col-3">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <input class="form-check-input" type="checkbox" name="essentials" value="TV" id="flexCheckDefault">
                             <label class="form-check-label" for="flexCheckDefault">
-                                Default checkbox
+                                TV
                             </label>
                         </div>
                         <div class="form-check col-3">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <input class="form-check-input" type="checkbox" name="essentials" value="Refrigerator" id="flexCheckDefault">
                             <label class="form-check-label" for="flexCheckDefault">
-                                Default checkbox
+                                Refrigerator
                             </label>
                         </div>
                         <div class="form-check col-3">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <input class="form-check-input" type="checkbox" name="essentials" value="Microwave" id="flexCheckDefault">
                             <label class="form-check-label" for="flexCheckDefault">
-                                Default checkbox
+                                Microwave
                             </label>
                         </div>
                         <div class="form-check col-3">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <input class="form-check-input" type="checkbox" name="essentials" value="Heater" id="flexCheckDefault">
                             <label class="form-check-label" for="flexCheckDefault">
-                                Default checkbox
+                                Heater
                             </label>
                         </div>
                     </div>
@@ -203,20 +203,20 @@
             
             <div class="col-12">
                 <label for="inputAddress" class="form-label">Address</label>
-                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                <input type="text" class="form-control" name="addressDetail" id="inputAddress" placeholder="1234 Main St">
             </div>
             <div class="col-md-6">
                 <label for="inputCity" class="form-label">City</label>
-                <input type="text" class="form-control" id="inputCity">
+                <input type="text" class="form-control" name="city" id="inputCity">
             </div>
             <div class="col-md-6">
                 <label for="inputCity" class="form-label">Country</label>
-                <input type="text" class="form-control" id="inputCity">
+                <input type="text" class="form-control" name="country" id="inputCity">
             </div>
 
             <div class="col-md-6">
                 <label for="inputEmail4" class="form-label">Pricing</label>
-                <input type="number" class="form-control" id="inputEmail4">
+                <input type="number" class="form-control" name="price"  id="inputEmail4">
             </div>
 
             <div class="col-12">
