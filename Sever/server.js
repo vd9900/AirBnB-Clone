@@ -13,10 +13,10 @@ const { UserDetail } = require("./Schemas/schema")
 //session
 app.set('trust proxy', 1) // trust first proxy
 app.use(session({
-  secret: '12346768890dsafs',
+  secret: '1234676890dsafs',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true }
+  cookie: { secure: false }
 }))
 
 // Middlewares
@@ -26,7 +26,7 @@ app.use("/", appRouter)
 
 mongoose.connect("mongodb://127.0.0.1/Users", { useNewUrlParser: true })
   .then(res => console.log("Sever connected to Database"))
-  .catch(err => console.log(err))
+  .catch(err => console.log(er))
 
 app.get('/login', function (req, res) {
   res.sendFile(path.join(__dirname, '../views/index.html'));
