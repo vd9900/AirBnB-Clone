@@ -26,7 +26,7 @@ app.use("/", appRouter)
 
 mongoose.connect("mongodb://127.0.0.1/Users", { useNewUrlParser: true })
   .then(res => console.log("Sever connected to Database"))
-  .catch(err => console.log(e))
+  .catch(err => console.log(er))
 
 app.get('/login', function (req, res) {
   res.sendFile(path.join(__dirname, '../views/index.html'));
