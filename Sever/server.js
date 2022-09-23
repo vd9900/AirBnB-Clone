@@ -15,7 +15,7 @@ app.set('trust proxy', 1) // trust first proxy
 app.use(session({
   secret: '1234676890dsafs',
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   cookie: { secure: false }
 }))
 
@@ -29,33 +29,46 @@ mongoose.connect("mongodb://127.0.0.1/Users", { useNewUrlParser: true })
   .catch(err => console.log(err))
 
 app.get('/login', function (req, res) {
-  res.sendFile(path.join(__dirname, '../views/index.html'));
+  if(req.session.isAuth){
+    res.redirect("/home")
+  }else{
+    res.sendFile(path.join(__dirname, '../views/index.html'));
+  }
 })
 app.post("/login", async (req, res) => {
   console.log(req.body)
   const result = await UserDetail.findOne({ email: req.body.email }, {})
-
+  
   if (result) {
-      const match = await bcrypt.compare(req.body.password, result.password)
-      if (match) {
-        sess = req.session
-        sess.email = req.body.email
-        res.redirect("/home")
-      } else {
-        res.send(`wrong password try again <a href="http://localhost:4000/login">login</a>`)
+    const match = await bcrypt.compare(req.body.password, result.password)
+    if (match) {
+      //adding session
+      req.session.isAuth = true;
+      req.session.save()
+      res.redirect("/home")
+    } else {
+      res.send(`wrong password try again <a href="http://localhost:4000/login">login</a>`)
     }
   } else {
-
+    
     res.send(`User not founded! try again <a href="http://localhost:4000/login">login</a>`)
   }
-
-
-
-
+  
+  
+  
+  
 })
-
+const lll = {
+  name:"vinith",
+  age:18
+}
 app.get('/home', function (req, res) {
+if(req.session.isAuth){
+  res.body = lll;
   res.sendFile(path.join(__dirname, '../views/home.html'));
+}else{
+ res.redirect("/login")
+}
 });
 // home page
 // appRouter.route("/").get(homeGET) 
@@ -91,7 +104,19 @@ app.post("/signin", (req, res) => {
     if (err) {
       res.send("please try again later")
     } else {
+      
+      res.redirect("/login")
+    }
+  })
+})
 
+// logout page
+app.get("/logout",(req,res)=>{
+  req.session.destroy((err)=>{
+    if(err){
+      console.log(err);
+      res.send("try again later")
+    }else{
       res.redirect("/login")
     }
   })
@@ -101,7 +126,13 @@ app.post("/signin", (req, res) => {
 //Hoster page
 // appRouter.route("/hoster").get(productGET)
 app.get("/hoster", (req, res) => {
-  res.sendFile(path.join(__dirname, "../views/hoster.html"))
+  console.log(req.session.isAuth)
+  if(req.session.isAuth){
+    res.sendFile(path.join(__dirname, "../views/hoster.html"))
+  }else{
+   res.redirect("/login")
+  }
+  console.log(req.session.isAuth)
 })
 app.post("/hoster", (req, res) => {
   console.log(req.body.indoor);
@@ -113,7 +144,11 @@ app.post("/hoster", (req, res) => {
 //Product page
 // appRouter.route("/product").get(productGET)
 app.get("/product", (req, res) => {
-  res.sendFile(path.join(__dirname, "../views/product.html"))
+  if(req.session.isAuth){
+    res.sendFile(path.join(__dirname, "../views/product.html"))
+  }else{
+   res.redirect("/login")
+   }
 })
 
 
