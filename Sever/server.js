@@ -60,7 +60,7 @@ app.post("/login", async (req, res) => {
 })
 const lll = {
   name:"vinith",
-  ag
+  a
 }
 app.get('/home', function (req, res) {
 if(req.session.isAuth){
