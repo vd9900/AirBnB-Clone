@@ -1,5 +1,4 @@
 function singinPOST(req, res) {
-   co
   const NewUserDetail = new UserDetail({
     name: req.body.name,
     userId: req.body.userId,
