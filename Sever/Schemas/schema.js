@@ -46,6 +46,10 @@ const userDetailSchema = new mongoose.Schema({
             type:String
         }
     },
+    sessionId:{
+        type:Number,
+        default:()=> nanoid()
+    },
     updated: {
         type: Date,
         default: Date.now
@@ -58,6 +62,7 @@ const UserDetail = mongoose.model("UserDetail", userDetailSchema)
 const roomsdetailschema = new mongoose.Schema({
     propertyId: {
         type: Number,
+        default : ()=>nanoid(),
     },
     owner: {
         type: String,
@@ -124,4 +129,4 @@ const roomsdetailschema = new mongoose.Schema({
 })
 const HostedRoomDetails = new mongoose.model("Hostedroomdetails", roomsdetailschema)
 
-module.exports = { UserDetail }
+module.exports = { UserDetail,HostedRoomDetails }

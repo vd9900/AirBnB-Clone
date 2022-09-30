@@ -8,7 +8,7 @@ const { default: mongoose } = require("mongoose");
 const app = express();
 const appRouter = express.Router();
 
-const { UserDetail } = require("./Schemas/schema")
+const { UserDetail,HostedRoomDetails } = require("./Schemas/schema")
 
 //session
 app.set('trust proxy', 1) // trust first proxy
@@ -64,7 +64,6 @@ const lll = {
 }
 app.get('/home', function (req, res) {
 if(req.session.isAuth){
-  res.body = lll;
   res.sendFile(path.join(__dirname, '../views/home.html'));
 }else{
  res.redirect("/login")
@@ -102,6 +101,7 @@ app.post("/signin", (req, res) => {
   })
   NewUserDetail.save((err, docs) => {
     if (err) {
+      console.log(err)
       res.send("please try again later")
     } else {
       
@@ -138,7 +138,9 @@ app.post("/hoster", (req, res) => {
   console.log(req.body.indoor);
   console.log(req.body.outdoor);
   console.log(req.body.essentials);
-  res.send("Thank you for joining us, we wish you mar Ja")
+const newHostedRoomDetails =  new HostedRoomDetails({
+})
+  res.send(`User not founded! try again <a href="http://localhost:4000/home">back to home</a>`)
 })
 
 //Product page
@@ -158,6 +160,11 @@ app.get("/product", (req, res) => {
 
 // Admin page
 // appRouter.route("/Admin").get(adminGET)
+
+// fecthing data to front-end
+app.get("/fetch",(req,res)=>{
+  
+})
 
 
 
