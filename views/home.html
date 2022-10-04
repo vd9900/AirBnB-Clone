@@ -22,9 +22,11 @@
             <span><a href="http://localhost:4000/" class="text-decoration-none text-danger fs-2">AirBnB</a></span>
             <div class="ms-auto me-3">
                 <span class="w-70 me-3"><a href="http://localhost:4000/hoster">Become a hoster</a></span>
+                <span class="w-70 me-3"><a href="http://localhost:4000/mybookings">my booking's</a></span>
                 <span class="w-70 me-3">Welcome Vinith</span>
                 <button type="button" class="btn btn-outline-primary">Edit Profile</button>
-                <button type="button" class="btn btn-outline-danger ms-2">Logout</button>
+                <button type="button" class="btn btn-outline-danger ms-2"><a href="/logout"
+                        class="text-decoration-none text-dark">Logout</a></button>
             </div>
 
 
@@ -91,6 +93,21 @@
 
 
     </section>
+    <script>
+        console.log("working");
+    async function fetchdata() { 
+            const fetchdata = await fetch("http://localhost:4000/fetchUserData")
+            const data = await fetchdata.json();
+            console.log(data)
+        }
+        fetchdata()
+        async function fetchpropertydata() { 
+            const fetchdata = await fetch("http://localhost:4000/fetchproperties")
+            const data = await fetchdata.json();
+            console.log(data)
+        }
+        fetchpropertydata()
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
         crossorigin="anonymous"></script>

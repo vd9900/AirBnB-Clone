@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>my booking details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+</head>
+<!-- Basic style -->
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .mycontainer {
+        position: relative;
+        width: 400px;
+        background: #fff;
+        padding: 20px 30px;
+        border: 1px solid #444;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .mycontainer .post {
+        display: none;
+    }
+
+    .mycontainer .text {
+        font-size: 25px;
+        color: #666;
+        font-weight: 500;
+    }
+
+    .mycontainer .edit {
+        position: absolute;
+        right: 10px;
+        top: 5px;
+        font-size: 16px;
+        color: #666;
+        font-weight: 500;
+        cursor: pointer;
+    }
+
+    .mycontainer .edit:hover {
+        text-decoration: underline;
+    }
+
+    .mycontainer .star-widget input {
+        display: none;
+    }
+
+    .star-widget label {
+        font-size: 40px;
+        color: #444;
+        padding: 10px;
+        float: right;
+        transition: all 0.2s ease;
+    }
+
+    input:not(:checked)~label:hover,
+    input:not(:checked)~label:hover~label {
+        color: #fd4;
+    }
+
+    input:checked~label {
+        color: #fd4;
+    }
+
+    input#rate-5:checked~label {
+        color: #fe7;
+        text-shadow: 0 0 20px #952;
+    }
+
+    #rate-1:checked~form header:before {
+        content: "I just hate it ";
+    }
+
+    #rate-2:checked~form header:before {
+        content: "I don't like it ";
+    }
+
+    #rate-3:checked~form header:before {
+        content: "It is awesome ";
+    }
+
+    #rate-4:checked~form header:before {
+        content: "I just like it ";
+    }
+
+    #rate-5:checked~form header:before {
+        content: "I just love it ";
+    }
+
+    .container form {
+        display: none;
+    }
+
+    input:checked~form {
+        display: block;
+    }
+
+    form header {
+        width: 100%;
+        font-size: 25px;
+        color: #fe7;
+        font-weight: 500;
+        margin: 5px 0 20px 0;
+        text-align: center;
+        transition: all 0.2s ease;
+    }
+
+    form .textarea {
+        height: 100px;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    form .textarea textarea {
+        height: 100%;
+        width: 100%;
+        outline: none;
+        color: #eee;
+        border: 1px solid #333;
+        background: #222;
+        padding: 10px;
+        font-size: 17px;
+        resize: none;
+    }
+
+    .textarea textarea:focus {
+        border-color: #444;
+    }
+
+    form .btn {
+        height: 45px;
+        width: 100%;
+        margin: 15px 0;
+    }
+
+    form .btn button {
+        height: 100%;
+        width: 100%;
+        border: 1px solid #444;
+        outline: none;
+        background: #222;
+        color: #999;
+        font-size: 17px;
+        font-weight: 500;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    form .btn button:hover {
+        background: #1b1b1b;
+    }
+</style>
+
+<body>
+    <section>
+
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
+                <span><a href="http://localhost:4000/" class="text-decoration-none text-danger fs-2">AirBnB</a></span>
+                <div class="ms-auto me-3">
+                    <span class="w-70 me-3"><a href="/hoster">Become a hoster</a></span>
+                    <span class="w-70 me-3">Welcome Vinith</span>
+                    <button type="button" class="btn btn-outline-primary">Edit Profile</button>
+                    <button type="button" class="btn btn-outline-danger ms-2"><a href="/logout"
+                            class="text-decoration-none text-dark">Logout</a></button>
+                </div>
+            </div>
+        </nav>
+        <div class="p-3">
+            <!-- post component -->
+            <div style="width:76vw;" class="bg-light m-auto px-3">
+                <!-- post title -->
+                <h1>big house here</h1>
+                <!-- place -->
+                <h3>Mumbai, India</h3>
+
+                <!--  tumbmail -->
+                <h2 class="my-4">Luxury stay in Baa Atoll, North Province, Maldives</h2>
+                <div class="wrapper mt-5">
+                    <div class="row d-flex justify-content-between">
+                        <div class="col-lg-7 col-md-12">
+                            <div class="col-lg-12 border rounded border-dark">
+                                <div class="row px-1 bookingContent my-2">
+                                    <!-- guest name -->
+                                    <div class="col-lg-12 col-md-12 mt-1">
+                                        <label for="guestName" class="form-label">Guest Name:</label>
+                                        <input type="text" class="form-control" id="guestName" name="GuestName"
+                                            readonly>
+                                    </div>
+                                    <!-- check in -->
+                                    <div class="col-lg-6 col-md-12 mt-3">
+                                        <label for="checkIn" class="form-label">Check in</label>
+                                        <input type="text" class="form-control" id="checkIn" name="Checkin" readonly>
+                                    </div>
+                                    <!-- check out -->
+                                    <div class="col-lg-6 col-md-12 mt-3">
+                                        <label for="checkOut" class="form-label">Check out</label>
+                                        <input type="text" class="form-control" id="checkOut" name="Checkout" readonly>
+                                    </div>
+                                    <!-- no of person -->
+                                    <div class="col-lg-6 col-md-12 mt-3">
+                                        <label for="nop" class="form-label">No of person:</label>
+                                        <input type="number" class="form-control" id="nop" name="Nop" readonly>
+                                    </div>
+                                    <!-- no of nights stay -->
+                                    <div class="col-lg-6 col-md-12 mt-3">
+                                        <label for="non" class="form-label">No of nights</label>
+                                        <input type="number" class="form-control" id="non" name="Non" readonly>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 mt-3">
+                                        <label for="totalPrice" class="form-label">Total Price</label>
+                                        <input type="number" class="form-control" id="totalPrice" name="Totalprice"
+                                            readonly>
+                                    </div>
+                                    <!-- payment method -->
+                                    <div class="col-lg-6 col-md-12 mt-3">
+                                        <label for="payment" class="form-label">Payment option</label>
+                                        <input type="text" class="form-control" id="payment" name="Checkout" readonly>
+                                    </div>
+                                    <!-- button from backend -->
+                                    <div
+                                        class="button col-lg-12 col-md-12 d-flex justify-content-around align-items-center mt-3">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="container my-3">
+                    <h3>reviews & feedback</h3>
+                    <div class="mycontainer">
+                        <div class="post">
+                            <div class="text">Thanks for rating us!</div>
+                            <div class="edit">EDIT</div>
+                        </div>
+                        <div class="star-widget">
+                            <input type="radio" name="rate" id="rate-5">
+                            <label for="rate-5" class="fas fa-star"></label>
+                            <input type="radio" name="rate" id="rate-4">
+                            <label for="rate-4" class="fas fa-star"></label>
+                            <input type="radio" name="rate" id="rate-3">
+                            <label for="rate-3" class="fas fa-star"></label>
+                            <input type="radio" name="rate" id="rate-2">
+                            <label for="rate-2" class="fas fa-star"></label>
+                            <input type="radio" name="rate" id="rate-1">
+                            <label for="rate-1" class="fas fa-star"></label>
+                            <form action="#">
+                                <header></header>
+                                <div class="textarea">
+                                    <textarea cols="30" placeholder="Describe your experience.."></textarea>
+                                </div>
+                                <div class="btn mb-0">
+                                    <button type="submit">Post</button>
+                                </div>
+                                <div class="btn m-0">
+                                    <button ><a href="http://localhost:4000/help" class="">Need help?</a></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- Javascript code for rating -->
+    <script>
+        const btn = document.querySelector("button");
+        const post = document.querySelector(".post");
+        const widget = document.querySelector(".star-widget");
+        const editBtn = document.querySelector(".edit");
+        btn.onclick = () => {
+            widget.style.display = "none";
+            post.style.display = "block";
+            editBtn.onclick = () => {
+                widget.style.display = "block";
+                post.style.display = "none";
+            }
+            return false;
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

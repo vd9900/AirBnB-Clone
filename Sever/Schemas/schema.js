@@ -35,20 +35,16 @@ const userDetailSchema = new mongoose.Schema({
         data: Buffer,
         contentType: String
     },
-    address:{
-        street:{
-            type:String
+    address: {
+        street: {
+            type: String
         },
-        city:{
-            type:String
+        city: {
+            type: String
         },
-        country:{
-            type:String
+        country: {
+            type: String
         }
-    },
-    sessionId:{
-        type:Number,
-        default:()=> nanoid()
     },
     updated: {
         type: Date,
@@ -62,7 +58,6 @@ const UserDetail = mongoose.model("UserDetail", userDetailSchema)
 const roomsdetailschema = new mongoose.Schema({
     propertyId: {
         type: Number,
-        default : ()=>nanoid(),
     },
     owner: {
         type: String,
@@ -105,13 +100,6 @@ const roomsdetailschema = new mongoose.Schema({
     roomDescription: {
         type: String
     },
-    desclaimer: {
-        type: String
-    },
-    updated: {
-        type: Date,
-        default: Date.now
-    },
     amenities: {
         indoor: {
             type: []
@@ -121,6 +109,10 @@ const roomsdetailschema = new mongoose.Schema({
         },
         essentials: {
             type: []
+        },
+        updated: {
+            type: Date,
+            default: Date.now
         }
     }
 
@@ -129,4 +121,4 @@ const roomsdetailschema = new mongoose.Schema({
 })
 const HostedRoomDetails = new mongoose.model("Hostedroomdetails", roomsdetailschema)
 
-module.exports = { UserDetail,HostedRoomDetails }
+module.exports = { UserDetail, HostedRoomDetails }

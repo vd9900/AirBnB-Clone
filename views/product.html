@@ -56,9 +56,11 @@
             <div class="container-fluid">
                 <span><a href="http://localhost:4000/" class="text-decoration-none text-danger fs-2">AirBnB</a></span>
                 <div class="ms-auto me-3">
-                    <span class="w-70 me-3"><a href="">Become a hoster</a></span>
+                    <span class="w-70 me-3"><a href="/hoster">Become a hoster</a></span>
                     <span class="w-70 me-3">Welcome Vinith</span>
                     <button type="button" class="btn btn-outline-primary">Edit Profile</button>
+                    <button type="button" class="btn btn-outline-danger ms-2"><a href="/logout"
+                            class="text-decoration-none text-dark">Logout</a></button>
                 </div>
             </div>
         </nav>
@@ -66,7 +68,14 @@
             <!-- post component -->
             <div style="width:76vw;" class="bg-light m-auto px-3">
                 <!-- post title -->
-                <h1>big house here</h1>
+                <div class="row">
+                    <div class="col">
+                        <h1>big house here</h1>
+                    </div>
+                    <div class="col d-flex justify-content-end">
+                        <h1><i class="fa-solid fa-indian-rupee-sign"></i>price:1900</h1>
+                    </div>
+                </div>
                 <!-- place -->
                 <h3>Mumbai, India</h3>
                 <!-- imgs -->
@@ -166,42 +175,68 @@
                         <li class="list-group-item">And a fifth one</li>
                     </ul>
                 </div>
+
+                <!-- hoster details -->
+                <div style="height: 45px;" class="d-flex align-items-center bg-danger ps-3 mt-3 w-50">
+                    <!-- user image -->
+                    <span></span>
+                    <!-- user name -->
+                    <span>MR.VINITH</span>
+                </div>
+                <!-- booking form -->
+                <div class="col-lg-5 col-md-12 my-3 border border-dark rounded">
+                    <form class="mt-2 px-2" action="http://localhost:4000/product/bookingconf">
+                        <div class="row">
+                            <!-- alert here -->
+                            <div class="col-12 showalert">
+
+                            </div>
+                            <!-- guest name -->
+                            <div class="col-lg-12 col-md-12">
+                                <label for="guestName" class="form-label">GuestName</label>
+                                <input type="text" class="form-control" id="guestName" name="GuestName" required>
+                            </div>
+                            <!-- check in -->
+                            <div class="col-6">
+                                <label for="checkIn" class="form-label">Check in</label>
+                                <input type="date" class="form-control" id="checkIn" name="CheckIn" required>
+                            </div>
+                            <!-- check out -->
+                            <div class="col-6">
+                                <label for="checkOut" class="form-label">Check out</label>
+                                <input type="date" class="form-control" id="checkOut" name="CheckOut" required>
+                            </div>
+                        </div>
+                        <!-- Nop -->
+                        <div class="col-12 mt-3">
+                            <label for="nop" class="form-label">No of person</label>
+                            <input type="number" class="form-control" id="nop" name="Nop" required>
+                        </div>
+                        <!-- no of nights -->
+                        <div class="col-lg-4 col-md-12 mt-3">
+                            <label for="non" class="form-label">No of nights</label>
+                            <input type="number" class="form-control" id="non" name="Non" required>
+                        </div>
+                        <!-- payment option -->
+                        <div class="col-lg-12 col-md-12 mt-3">
+                            <label for="payment" class="form-label">Payment option</label>
+                            <select class="form-select" id="payment" name="Payment" required>
+                                <option>Pay at property</option>
+                                <option>Online payment</option>
+                            </select>
+                        </div>
+                        <!-- submit -->
+                        <div class="col-12 my-3">
+                            <button class="btn btn-primary submitBtn" type="submit">Submit form</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-        <!-- hoster details -->
-        <div class="d-flex">
-            <!-- user image -->
-            <span></span>
-            <!-- user name -->
         </div>
+
     </section>
     <!-- Javascript code for next and previous button -->
-    <script>
-        let images = [
-            'https://codelearningpoint.com/uploads/1627415311.jpg',
-            'https://codelearningpoint.com/uploads/1627415323.jpg',
-            'https://codelearningpoint.com/uploads/1627415302.jpg'
-        ];
-        let imageTag = document.querySelector('.imageTag');
-        let i = 0;
-
-
-        function next() {
-            if (i >= images.length - 1) {
-                return false;
-            }
-            i++;
-            imageTag.setAttribute('src', images[i]);
-        }
-        function previous() {
-            if (i <= 0) {
-                return false;
-            }
-            i--;
-            imageTag.setAttribute('src', images[i]);
-        }
-
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
         crossorigin="anonymous"></script>

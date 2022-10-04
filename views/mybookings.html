@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>house</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+</head>
+<!-- Basic style -->
+<style>
+    .img-container {
+        margin: 20px auto;
+        position: relative;
+    }
+
+    .btn-container {
+        position: absolute;
+        text-align: center;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 10px;
+        top: 42%;
+        width: 100%;
+    }
+
+    .img-container>img {
+        height: 400px;
+        width: 100%;
+        display: block;
+        margin: auto;
+        padding-bottom: 20px;
+    }
+
+    .btn-container>button {
+        outline: none;
+        width: 40px;
+        height: 40px;
+        border: none;
+        background-color: rgb(25, 121, 211);
+        border-radius: 50%;
+        color: white;
+        cursor: pointer;
+    }
+
+    .btn-container>button:last-child {
+        margin: 0 50px 0 0;
+    }
+</style>
+
+<body>
+    <section>
+
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
+                <span><a href="http://localhost:4000/" class="text-decoration-none text-danger fs-2">AirBnB</a></span>
+                <div class="ms-auto me-3">
+                    <span class="w-70 me-3"><a href="/hoster">Become a hoster</a></span>
+                    <span class="w-70 me-3">Welcome Vinith</span>
+                    <button type="button" class="btn btn-outline-primary">Edit Profile</button>
+                    <button type="button" class="btn btn-outline-danger ms-2"><a href="/logout"
+                            class="text-decoration-none text-dark">Logout</a></button>
+                </div>
+            </div>
+        </nav>
+        <div class="p-3">
+            <!-- post component -->
+            <div style="width:76vw;" class="bg-light m-auto px-3">
+                <h2>My bookings</h2>
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Propertiy</th>
+                        <th scope="col">status</th>
+                        <th scope="col">price</th>
+                        <th scope="col">details</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <!-- users  details -->
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>big house</td>
+                        <td>good</td>
+                        <td>19000</td>
+                        <td><a href="http://localhost:4000/mybooking/details">Check more</a></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">3</th>
+                        <td colspan="2">Larry the Bird</td>
+                        <td>@twitter</td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+    </section>
+    <!-- Javascript code for next and previous button -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
