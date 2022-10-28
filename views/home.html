@@ -18,7 +18,7 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
-            <span><a href="http://localhost:4000/" class="text-decoration-none text-danger fs-2">AirBnB</a></span>
+            <span><a href="http://localhost:4000/home" class="text-decoration-none text-danger fs-2">AirBnB</a></span>
             <div class="ms-auto me-3">
                 <span class="w-70 me-3"><a href="http://localhost:4000/hoster">Become a hoster</a></span>
                 <span class="w-70 me-3"><a href="http://localhost:4000/mybookings">my booking's</a></span>
@@ -36,77 +36,53 @@
         <div style="min-height:500px;"
             class="parent-post-container px-5 py-3 bg-dark d-flex align-items-center flex-wrap gap-3">
             <!-- post-1 -->
-            <div class="card">
-                <img src="https://i0.wp.com/www.caltonproperties.com/wp-content/uploads/2018/12/Most-Expensive-Hotel-Room-In-Vegas.jpg?ssl=1"
-                    class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="http://localhost:4000/product" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-            <!-- post-1 -->
-            <div class="card">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-            <!-- post-1 -->
-            <div class="card">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-            <!-- post-1 -->
-            <div class="card">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-            <!-- post-1 -->
-            <div class="card">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-            <!-- post-1 -->
         </div>
-        </div>
-
 
     </section>
     <script>
         console.log("working");
-    async function fetchdata() { 
+        async function fetchdata() {
             const fetchdata = await fetch("http://localhost:4000/fetchUserData")
             const data = await fetchdata.json();
             console.log(data)
         }
         fetchdata()
-        async function fetchpropertydata() { 
-            const fetchdata = await fetch("http://localhost:4000/fetchproperties")
-            const data = await fetchdata.json();
-            console.log(data)
+        async function fetchpropertydata() {
+            try {
+                // fetch data here
+                const fetchs = await fetch('http://localhost:4000/fetchproperties');
+
+                // convert data to json
+                const data = await fetchs.json();
+
+                // create cards here
+                for (let i = 0; i < data.length; i++) {
+                    const Maincard = document.createElement('div');
+                    Maincard.classList.add("cards", "bg-light","col-sm-12", "col-md-6", "col-lg-3", "my-3");
+                    const card = `<a href="http://localhost:4000/property/${data[i].propertyId}" class="text-decoration-none text-black"><div class="img">
+                <img class="card-img-top" src="./assets" alt="Card image cap">
+            </div>
+            <div class="cards-detail my-2">
+                <div class="card-heading d-flex justify-content-between">
+                    <h5 class="card-title">${data[i].propertyName}</h5>
+                </div>
+                <p class="card-text">${data[i].address.city}, ${data[i].address.country}</p>
+                <p class="card-text"><strong><span><i class="fa-solid fa-indian-rupee-sign"></i></span>${data[i].price}</strong> night</p>
+            </div></a>`;
+                    Maincard.innerHTML = card;
+                    const wrap = document.querySelector('.parent-post-container');
+                    // append card
+                    wrap.append(Maincard);
+                }
+            }
+            catch (err) {
+                // err
+                console.log(err)
+            }
         }
         fetchpropertydata()
     </script>
+    <script src="./scripts/home.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
         crossorigin="anonymous"></script>

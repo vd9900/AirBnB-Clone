@@ -54,7 +54,7 @@
 
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="container-fluid">
-                <span><a href="http://localhost:4000/" class="text-decoration-none text-danger fs-2">AirBnB</a></span>
+                <span><a href="http://localhost:4000/home" class="text-decoration-none text-danger fs-2">AirBnB</a></span>
                 <div class="ms-auto me-3">
                     <span class="w-70 me-3"><a href="/hoster">Become a hoster</a></span>
                     <span class="w-70 me-3">Welcome Vinith</span>
@@ -70,14 +70,14 @@
                 <!-- post title -->
                 <div class="row">
                     <div class="col">
-                        <h1>big house here</h1>
+                        <h1 class="propertyName"></h1>
                     </div>
                     <div class="col d-flex justify-content-end">
-                        <h1><i class="fa-solid fa-indian-rupee-sign"></i>price:1900</h1>
+                        <h1><i class="fa-solid fa-indian-rupee-sign"></i>price: <span class="price"></span></h1>
                     </div>
                 </div>
                 <!-- place -->
-                <h3>Mumbai, India</h3>
+                <h3><span class="city"></span> <span class="country"></span></h3>
                 <!-- imgs -->
                 <div style="width:700px;" id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
@@ -106,41 +106,22 @@
                     </button>
                 </div>
                 <!--  tumbmail -->
-                <h2 class="my-4">Luxury stay in Baa Atoll, North Province, Maldives</h2>
+                <h2 class="my-4 mainTitle"></h2>
                 <div class="pe-5">
-                    <p class="me-5">Amilla Villa Estate is part of the UNESCO World Heritage Biosphere Reserve, in the
-                        Maldives’ Baa
-                        Atoll. This prestigious luxury rental has six beautiful bedrooms, an extremely generous amount
-                        of indoor and outdoor hosting spaces, a private beachfront, and an unparalleled view of the
-                        Indian Ocean.
-                        This villa has everything you’ll need to feel at home while you’re on the island. The fully
-                        equipped kitchen with breakfast bar and formal dining for ten are perfect for hosting. The
-                        entertainment lounge is a great space to watch movies, play videogames, and challenge your
-                        friends to a table tennis match. Outside on the terrace you’ll find the swimming pool and hot
-                        tub. Lined with sun loungers, sun beds, and spacious outdoor living and dining areas, the
-                        terrace is the perfect place to relax in privacy or host an elegant island dinner party. The
-                        villa also includes breakfast, laundry service, housekeeping, and twenty-four hour security.
-                        Amilla’s décor is simple and elegant. A bright and spacious atmosphere is created by
-                        predominantly using white. The vibrant blues, greens, and natural sunlight of the environment
-                        are the focal points. Cozy seating invites guests to relax in the tranquil indoor areas, while
-                        plenty of windows and openings let the ocean breeze flow freely throughout the interior. Several
-                        different balconies and outdoor living spaces make it easy to find a new spot to sit down with a
-                        glass of wine and enjoy the amazing ocean view.
-                        All six of the bedrooms feature spectacular ocean views and their own ensuite bathrooms with
-                        stand-alone rain showers. Four of the bedrooms have king sized beds and private balconies, while
-                        the other two bedrooms are great for kids, one with a set of twins beds and the other with a
-                        single bed.</p>
+                    <!-- detailed description -->
+                    <p class="me-5 roomDescription">
+                    </p>
                 </div>
                 <!--  guests, bedrooms beds bathrooms -->
                 <div class="">
                     <!-- guests -->
-                    <span class="me-2">12-guests</span>
+                    <span class="me-2"> <span class="guest"></span>-guests</span>
                     <!-- bedrooms -->
-                    <span>6-bedrooms</span>
+                    <span> <span class="bedRooms"></span>-bedrooms</span>
                     <!-- beds -->
-                    <span class="mx-2">6-beds</span>
+                    <span class="mx-2"> <span class="beds"></span>-beds</span>
                     <!-- bathrooms -->
-                    <span>6-bathrooms</span>
+                    <span><span class="bathRooms"></span>-bathrooms</span>
                 </div>
                 <!-- ratings -->
                 <div class="my-3 fs-3">
@@ -181,11 +162,11 @@
                     <!-- user image -->
                     <span></span>
                     <!-- user name -->
-                    <span>MR.VINITH</span>
+                    <span class="ownerName"></span>
                 </div>
                 <!-- booking form -->
                 <div class="col-lg-5 col-md-12 my-3 border border-dark rounded">
-                    <form class="mt-2 px-2" action="http://localhost:4000/product/bookingconf">
+                    <form class="mt-2 px-2" method="post" action="/property/bookingconf">
                         <div class="row">
                             <!-- alert here -->
                             <div class="col-12 showalert">
@@ -236,7 +217,51 @@
         </div>
 
     </section>
-    <!-- Javascript code for next and previous button -->
+    <!-- Javascript code for  -->
+    <script>
+        // all elemenet to add value
+        const propertyName = document.querySelector(".propertyName")
+        const mainTitle = document.querySelector(".mainTitle")
+        const ownerName = document.querySelector(".ownerName")
+        const city = document.querySelector(".city")
+        const state = document.querySelector(".state")
+        const country = document.querySelector(".country")
+        const price = document.querySelector(".price")
+        const size = document.querySelector(".size")
+        const guest = document.querySelector(".guest")
+        const beds = document.querySelector(".beds")
+        const bedRooms = document.querySelector(".bedRooms")
+        const bathRooms = document.querySelector(".bathRooms")
+        const roomDescription = document.querySelector(".roomDescription")
+        const indoor = document.querySelector(".indoor")
+        const outdoor = document.querySelector(".outdoor")
+        const essentials = document.querySelector(".essentials")
+        async function fetchpropertydata() {
+
+            try {
+                // fetch data here
+                const fetchs = await fetch('http://localhost:4000/fetchproperty');
+
+                // convert  json to data
+                const data = await fetchs.json();
+                console.log(data);
+                propertyName.innerHTML = data.propertyName;
+                mainTitle.innerHTML = data.mainTitle;
+                ownerName.innerHTML = data.owner;
+                price.innerHTML = data.price;
+                roomDescription.innerHTML = data.roomDescription;
+                guest.innerHTML = data.total.Allowedpeople;
+                beds.innerHTML = data.total.Beds;
+                Bedrooms.innerHTML = data.total.Bedrooms;
+                bathRooms.innerHTML = data.total.Bathrooms;
+            }
+            catch (err) {
+                // err
+                console.log(err)
+            }
+        }
+        fetchpropertydata()
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
         crossorigin="anonymous"></script>

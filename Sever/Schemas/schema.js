@@ -90,12 +90,18 @@ const roomsdetailschema = new mongoose.Schema({
         Bedrooms: {
             type: Number
         },
+        Beds: {
+            type: Number
+        },
         Bathrooms: {
             type: Number
         },
         Allowedpeople: {
             type: Number,
         }
+    },
+    mainTitle: {
+        type: String
     },
     roomDescription: {
         type: String
@@ -109,16 +115,56 @@ const roomsdetailschema = new mongoose.Schema({
         },
         essentials: {
             type: []
-        },
-        updated: {
-            type: Date,
-            default: Date.now
         }
+    },
+    updated: {
+        type: Date,
+        default: Date.now
     }
 
 
 
+
 })
+
+
+
 const HostedRoomDetails = new mongoose.model("Hostedroomdetails", roomsdetailschema)
 
-module.exports = { UserDetail, HostedRoomDetails }
+const bookedRoomDetails = mongoose.Schema({
+    GuestName: String,
+    whoBooked: String,
+    CheckIn: String,
+    CheckOut: String,
+    Nop: String,
+    Non: String,
+    Payment: String,
+    roomDetails: {
+        propertyId: String,
+        propertyName: String,
+        city: String,
+        country: String,
+        updated: String,
+    },
+    totalPrice: Number,
+    updated: {
+        type: Date,
+        default: Date.now
+    }
+
+
+})
+
+const BookedroomDetails = new mongoose.model("BookedroomDetails", bookedRoomDetails)
+
+const reviewDetials = new mongoose.Schema({
+    userName : String,
+    stars:Number,
+    Description:String,
+    updated:{
+        type:Date,
+        default:Date.now
+    } 
+
+})
+module.exports = { UserDetail, HostedRoomDetails, BookedroomDetails }

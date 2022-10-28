@@ -8,7 +8,7 @@ const { default: mongoose } = require("mongoose");
 const app = express();
 const appRouter = express.Router();
 
-const { UserDetail, HostedRoomDetails } = require("./Schemas/schema")
+const { UserDetail, HostedRoomDetails, BookedroomDetails } = require("./Schemas/schema")
 
 //session
 app.set('trust proxy', 1) // trust first proxy
@@ -67,9 +67,9 @@ const lll = {
 app.get('/home', function (req, res) {
   if (req.session.isAuth) {
     res.sendFile(path.join(__dirname, '../views/home.html'));
-    console.log(req.session.isAuth);
-    console.log(req.session.username);
-    console.log(req.session.email);
+    // console.log(req.session.isAuth);
+    // console.log(req.session.username);
+    // console.log(req.session.email);
   } else {
     res.redirect("/login")
   }
@@ -161,10 +161,12 @@ app.post("/hoster", async (req, res) => {
     price: req.body.price,
     size: req.body.size,
     total: {
-      Bedrooms: req.body.totalrooms,
+      Bedrooms: req.body.totalBedrooms,
+      Beds: req.body.totalBeds,
       Bathrooms: req.body.totalBathrooms,
       Allowedpeople: req.body.totalGuest
     },
+    mainTitle: req.body.mainTitle,
     roomDescription: req.body.description,
     amenities: {
       indoor: req.body.indoor,
@@ -186,8 +188,15 @@ app.post("/hoster", async (req, res) => {
 
 //Product page
 // appRouter.route("/product").get(productGET)
-app.get("/product", (req, res) => {
+app.get("/property/:id", (req, res) => {
   if (req.session.isAuth) {
+    // current clicked properity
+    if (req.session.clickedpro) {
+      delete req.session.clickedpro
+    }
+    req.session.clickedpro = req.params.id
+
+    console.log(req.params.id);
     res.sendFile(path.join(__dirname, "../views/product.html"))
   } else {
     res.redirect("/login")
@@ -204,7 +213,7 @@ app.get("/mybookings", (req, res) => {
 app.get("/mybooking/details", (req, res) => {
   res.sendFile(path.join(__dirname, "../views/bookingdeatils.html"))
 })
-app.get("/product/bookingconf", (req, res) => {
+app.get("/property/bookingconf", (req, res) => {
   res.sendFile(path.join(__dirname, "../views/bookingconf.html"))
 })
 
@@ -216,25 +225,84 @@ app.get("/help", (req, res) => {
 
 // Admin page
 // appRouter.route("/Admin").get(adminGET)
-const userdata = {
-  "name": "vinith",
-  "age": "18"
-}
-// fecthing data to front-end
-app.get("/fetchUserData", (req, res) => {
-  userdata.usermail = req.session.email
-  res.json(userdata)
+
+// conformation page
+app.post("/property/bookingconf", (req, res) => {
+  console.log(req.body);
+  if(req.session.bookedRoom){
+    delete req.session.bookedRoom;
+  }
+  req.session.bookedRoom = req.body
+
+  res.sendFile(path.join(__dirname, "../views/bookingconf.html"))
 })
-app.get("/fetchproperties",async (req, res) => {
+
+//conformed page
+app.get("/conformed",(req,res)=>{
+  console.log(req.session)
+  const newBookedroomDetails = new BookedroomDetails({
+    GuestName:req.session.bookedRoom.GuestName,
+    whoBooked:req.session.email,
+    CheckIn:req.session.bookedRoom.CheckIn,
+    CheckOut:req.session.bookedRoom.CheckOut,
+    Nop:req.session.bookedRoom.Nop,
+    Non:req.session.bookedRoom.Non,
+    Payment:req.session.bookedRoom.Payment,
+    roomDetails:{
+      propertyId:req.session.clickedpro,
+      propertyName:req.session.bookedRoom.propertyName,
+      city:req.session.bookedRoom.city,
+      country:req.session.bookedRoom.country,
+      updated:req.session.bookedRoom.updated,
+    }
+  }).save(
+    (err)=>{
+      if(!err){
+        res.send(`<h3>Awesome... your rocked🤩 booking conformed <br> <a href="http://localhost:4000/mybookings">Go to my booking</a></h3>`)
+      }else{
+        res.send(`<h3>Something went wrong Try again later <br> <a href="http://localhost:4000/home">Go to home page</a></h3>`)
+      }
+    }
+  )
+})
+
+// properity page showing to user
+
+// fecthing data to front-end
+app.get("/fetchproperties", async (req, res) => {
   const result = await HostedRoomDetails.find({}, {})
   res.json(result)
 
 })
+app.get("/fetchproperty", async (req, res) => {
+  const result = await HostedRoomDetails.findOne({ propertyId: req.session.clickedpro }, {})
+  res.json(result)
+})
+app.get("/fetchbookedRoom", async (req, res) => {
+  const result = await HostedRoomDetails.findOne({ propertyId: req.session.clickedpro }, {})
+  req.session.bookedRoom.roomDetails = {
+    propertyName: result.propertyName,
+    propertyId:req.session.clickedpro,
+    mainTitle: result.mainTitle,
+    city: result.address.city,
+    country: result.address.country,
+    updated: result.updated,
+  },
+
+    // calculating the total
+    req.session.bookedRoom.totalPrice = result.price * req.session.bookedRoom.Non
 
 
+    console.log(req.session.bookedRoom);
+  res.send(req.session.bookedRoom)
+})
+//  creating api for my booking properties
 
+app.get("/fetchmybookedrooms", async(req,res)=>{
+  const result = await BookedroomDetails.find({whoBooked:req.session.email},{});
+  res.json(result)
+})
 
 function signinPOST(req, res) {
-  res.send(req.body);
 }
 app.listen(4000)

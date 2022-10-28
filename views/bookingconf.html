@@ -54,7 +54,7 @@
 
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="container-fluid">
-                <span><a href="http://localhost:4000/" class="text-decoration-none text-danger fs-2">AirBnB</a></span>
+                <span><a href="http://localhost:4000/home" class="text-decoration-none text-danger fs-2">AirBnB</a></span>
                 <div class="ms-auto me-3">
                     <span class="w-70 me-3"><a href="/hoster">Become a hoster</a></span>
                     <span class="w-70 me-3">Welcome Vinith</span>
@@ -68,17 +68,17 @@
             <!-- post component -->
             <div style="width:76vw;" class="bg-light m-auto px-3">
                 <!-- post title -->
-                <h1>big house here</h1>
+                <h1 class="propertyName">big house here</h1>
                 <!-- place -->
-                <h3>Mumbai, India</h3>
+                <h3><span class="city"></span>,<span class="country"></span></h3>
 
                 <!--  tumbmail -->
-                <h2 class="my-4">Luxury stay in Baa Atoll, North Province, Maldives</h2>
+                <h2 class="my-4 maintitle">Luxury stay in Baa Atoll, North Province, Maldives</h2>
                 <div class="wrapper mt-5">
                     <div class="row d-flex justify-content-between">
                         <div class="col-lg-7 col-md-12">
                             <div class="col-lg-12 border rounded border-dark">
-                                <div class="row px-1 bookingContent my-2">
+                                <div class="row px-1  my-2">
                                     <!-- guest name -->
                                     <div class="col-lg-12 col-md-12 mt-1">
                                         <label for="guestName" class="form-label">Guest Name:</label>
@@ -88,7 +88,7 @@
                                     <!-- check in -->
                                     <div class="col-lg-6 col-md-12 mt-3">
                                         <label for="checkIn" class="form-label">Check in</label>
-                                        <input type="text" class="form-control" id="checkIn" name="Checkin" readonly>
+                                        <input type="date" class="form-control" id="checkIn" name="Checkin" readonly>
                                     </div>
                                     <!-- check out -->
                                     <div class="col-lg-6 col-md-12 mt-3">
@@ -126,10 +126,57 @@
                         </div>
                     </div>
                 </div>
+                <div class="container my-2">
+                    <a href="http://localhost:4000/conformed"><button class="btn btn-success">Conform</button></a>
+                </div>
+
             </div>
         </div>
 
     </section>
+    <script>
+        const city = document.querySelector(".city")
+        const country = document.querySelector(".country")
+        const propertyName = document.querySelector(".propertyName")
+        const mainTitle = document.querySelector(".mainTitle")
+        const guestName = document.querySelector("#guestName")
+        const nopeople = document.querySelector("#nop")
+        const nonight = document.querySelector("#non")
+        const checkIn = document.querySelector("#checkIn")
+        const checkOut = document.querySelector("#checkOut")
+        const totalPrice = document.querySelector("#totalPrice")
+        const payment = document.querySelector("#payment")
+        async function fetchpropertydata() {
+
+            try {
+                // fetch data here
+                const fetchs = await fetch('http://localhost:4000/fetchbookedRoom');
+
+                // convert  json to data
+                const data = await fetchs.json();
+                console.log(data);
+                console.log(data.CheckIn);
+                propertyName.innerHTML = data.roomDetails.propertyName
+                city.innerHTML = data.roomDetails.city
+                country.innerHTML = data.roomDetails.country 
+                // mainTitle.innerHTML = data.roomDetails.mainTitle 
+                guestName.value = data.GuestName
+                nopeople.value = data.Nop
+                nonight.value = data.Non
+                checkIn.value =  data.CheckIn 
+                checkOut.value = data.CheckOut
+                totalPrice.value = data.totalPrice 
+                payment.value = data.Payment
+
+
+            }
+            catch (err) {
+                // err
+                console.log(err)
+            }
+        }
+        fetchpropertydata()
+    </script>
     <!-- Javascript code for next and previous button -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"

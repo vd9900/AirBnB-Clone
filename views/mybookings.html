@@ -54,7 +54,8 @@
 
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="container-fluid">
-                <span><a href="http://localhost:4000/" class="text-decoration-none text-danger fs-2">AirBnB</a></span>
+                <span><a href="http://localhost:4000/home"
+                        class="text-decoration-none text-danger fs-2">AirBnB</a></span>
                 <div class="ms-auto me-3">
                     <span class="w-70 me-3"><a href="/hoster">Become a hoster</a></span>
                     <span class="w-70 me-3">Welcome Vinith</span>
@@ -70,40 +71,88 @@
                 <h2>My bookings</h2>
                 <table class="table">
                     <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Propertiy</th>
-                        <th scope="col">status</th>
-                        <th scope="col">price</th>
-                        <th scope="col">details</th>
-                      </tr>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Propertiy</th>
+                            <th scope="col">Bookeddate</th>
+                            <th scope="col">guest Name</th>
+                            <th scope="col">details</th>
+                        </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="tableBody">
                         <!-- users  details -->
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>big house</td>
-                        <td>good</td>
-                        <td>19000</td>
-                        <td><a href="http://localhost:4000/mybooking/details">Check more</a></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td colspan="2">Larry the Bird</td>
-                        <td>@twitter</td>
-                      </tr>
+                        <!-- <tr>
+                            <th scope="row">1</th>
+                            <td>big house</td>
+                            <td>good</td>
+                            <td>19000</td>
+                            <td><a href="http://localhost:4000/mybooking/details">Check more</a></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@fat</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td colspan="2">Larry the Bird</td>
+                            <td>@twitter</td>
+                        </tr> -->
                     </tbody>
-                  </table>
+                </table>
             </div>
         </div>
     </section>
-    <!-- Javascript code for next and previous button -->
+    <!-- Javascript code for -->
+    <script>
+        async function fetchbookedrooms() {
+            try {
+                const tableBody = document.querySelector(".tableBody")
+                // fetch data here
+                const fetchs = await fetch('http://localhost:4000/fetchmybookedrooms')
+
+
+                // convert data to json
+                const data = await fetchs.json();
+
+                if (data.length === 0) {
+                    tableBody.innerHTML = `<h3>no booking yet</h3>
+                     <br>
+                      <a href="http://localhost:4000/home ">
+                        <button class="btn btn-info">Book now</button> </a>`
+                } else {
+                    let tableindex = 1;
+                    console.log(data.length);
+                    for (i = 0; i < data.length; i++) {
+                        // console.log(i);
+                        const tr = document.createElement("tr")
+                      
+                        // tr.innerHTML = `
+                        // <!--  index-->
+                        // <th scope="row">${tableindex}</th>
+                        // <!--Bookeddate-->
+                        // <td colspan="2">${data[i].roomDetails.updated}</td>
+                        // <!-- Guestname-->
+                        // <td>${data[i].GuestName}</td>
+                        // <!-- Detail link-->
+                        // <td><a href="http://localhost:4000/mybooking/${data[i].__id}">Check more</a></td>
+                        // `
+                        // tableBody.appendChild(tr)
+                        // tableBody++;
+                        console.log(i);
+                        console.log(data[i]);
+                    }
+                }
+
+            }
+            catch (err) {
+                // err
+                console.log(err)
+            }
+        }
+        fetchbookedrooms()
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
         crossorigin="anonymous"></script>
