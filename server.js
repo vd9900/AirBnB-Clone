@@ -12,7 +12,11 @@ const appRouter = express.Router();
 const { signinPOST } = require("./contorller/signin")
 const { loginGET, loginPOST } = require("./contorller/login")
 const { propertyGET } = require("./contorller/login")
+const { bookingconfGET, bookingconfPOST } = require("./contorller/login")
+const { bookingconformedGET } = require("./contorller/login")
 const { mybookingsGET } = require("./contorller/login")
+const { mybookingsdetailsGET } = require("./contorller/login")
+const { helpGET } = require("./contorller/login")
 const { logoutGET } = require("./contorller/logout")
 const { UserDetail, HostedRoomDetails, BookedroomDetails } = require("./Schemas/schema")
 
@@ -69,21 +73,24 @@ appRouter.route("/hoster").get(hosterGET).post(hosterPOST)
 //Product page
 appRouter.route("/property/:id").get(propertyGET)
 
+// my booking conformation  page
+appRouter.route("/property/bookingconf").get(bookingconfGET).post(bookingconfPOST)
+
+// my booking conformed  page
+appRouter.route("/conformed").get(bookingconformedGET)
 
 // my booking  page
 appRouter.route("/mybookings").get(mybookingsGET)
 
 // my booking details  page
-
-app.get("/mybooking/details", (req, res) => {
-  res.sendFile(path.join(__dirname, "../views/bookingdeatils.html"))
-})
-app.get("/property/bookingconf", (req, res) => {
-  res.sendFile(path.join(__dirname, "../views/bookingconf.html"))
-})
+appRouter.route("/mybooking/details").get(mybookingsdetailsGET)
 
 //contact page
-app.get("/help", (req, res) => {
+appRouter.route("/help").get(helpGET)
+
+
+
+app.get("", (req, res) => {
   res.sendFile(path.join(__dirname, "../views/help.html"))
 })
 // appRouter.route("/contact").get(contactGET)
@@ -91,45 +98,9 @@ app.get("/help", (req, res) => {
 // Admin page
 // appRouter.route("/Admin").get(adminGET)
 
-// conformation page
-app.post("/property/bookingconf", (req, res) => {
-  console.log(req.body);
-  if (req.session.bookedRoom) {
-    delete req.session.bookedRoom;
-  }
-  req.session.bookedRoom = req.body
 
-  res.sendFile(path.join(__dirname, "../views/bookingconf.html"))
-})
 
 //conformed page
-app.get("/conformed", (req, res) => {
-  console.log(req.session)
-  const newBookedroomDetails = new BookedroomDetails({
-    GuestName: req.session.bookedRoom.GuestName,
-    whoBooked: req.session.email,
-    CheckIn: req.session.bookedRoom.CheckIn,
-    CheckOut: req.session.bookedRoom.CheckOut,
-    Nop: req.session.bookedRoom.Nop,
-    Non: req.session.bookedRoom.Non,
-    Payment: req.session.bookedRoom.Payment,
-    roomDetails: {
-      propertyId: req.session.clickedpro,
-      propertyName: req.session.bookedRoom.propertyName,
-      city: req.session.bookedRoom.city,
-      country: req.session.bookedRoom.country,
-      updated: req.session.bookedRoom.updated,
-    }
-  }).save(
-    (err) => {
-      if (!err) {
-        res.send(`<h3>Awesome... your rocked🤩 booking conformed <br> <a href="http://localhost:4000/mybookings">Go to my booking</a></h3>`)
-      } else {
-        res.send(`<h3>Something went wrong Try again later <br> <a href="http://localhost:4000/home">Go to home page</a></h3>`)
-      }
-    }
-  )
-})
 
 // properity page showing to user
 
