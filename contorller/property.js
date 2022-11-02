@@ -12,3 +12,4 @@ function propertyGET(req, res) {
         res.redirect("/login")
     }
 }
+module.exports = { propertyGET }

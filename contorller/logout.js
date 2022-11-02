@@ -1,3 +1,4 @@
+const path = require("path");
 
 // GET method
 function logoutGET(req, res) {

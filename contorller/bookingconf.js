@@ -1,3 +1,5 @@
+const path = require("path");
+
 function bookingconfGET(req, res) {
     res.sendFile(path.join(__dirname, "../views/bookingconf.html"))
 }

@@ -1,5 +1,5 @@
 
-const { UserDetail, HostedRoomDetails, BookedroomDetails } = require("../Schemas/schema")
+const { HostedRoomDetails } = require("../Schemas/schema")
 
 function hosterGET(req, res) {
     if (req.session.isAuth) {
@@ -10,9 +10,8 @@ function hosterGET(req, res) {
     console.log(req.session.isAuth)
 }
 
-async function hosterPOST(gallery, hosterpost)
 
-async function hosterpost(req, res) {
+async function hosterPOST(req, res) {
     let properityId = 0;
 
     if (await HostedRoomDetails.count({}) == 0) {
@@ -65,3 +64,6 @@ async function hosterpost(req, res) {
         }
     })
 }
+
+
+module.exports = { hosterGET, hosterPOST }

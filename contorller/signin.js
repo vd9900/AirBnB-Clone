@@ -1,6 +1,5 @@
 
 // post method
-
 function signinPOST(req, res) {
   console.log(req.body)
   // hashing the password
@@ -36,4 +35,4 @@ function signinPOST(req, res) {
 
 
 
-module.exports = { singinPOST }
+module.exports = { signinPOST }

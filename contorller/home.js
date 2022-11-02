@@ -1,3 +1,7 @@
+
+const path = require("path");
+
+
 function homeGET(req, res) {
     if (req.session.isAuth) {
         res.sendFile(path.join(__dirname, '../views/home.html'));

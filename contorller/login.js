@@ -1,3 +1,5 @@
+const path = require("path");
+const { UserDetail } = require("../Schemas/schema")
 
 // GET Method
 function loginGET(req, res) {

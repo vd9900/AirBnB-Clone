@@ -11,12 +11,14 @@ const appRouter = express.Router();
 
 const { signinPOST } = require("./contorller/signin")
 const { loginGET, loginPOST } = require("./contorller/login")
-const { propertyGET } = require("./contorller/login")
-const { bookingconfGET, bookingconfPOST } = require("./contorller/login")
-const { bookingconformedGET } = require("./contorller/login")
-const { mybookingsGET } = require("./contorller/login")
-const { mybookingsdetailsGET } = require("./contorller/login")
-const { helpGET } = require("./contorller/login")
+const { homeGET } = require("./contorller/home")
+const { hosterGET, hosterPOST } = require("./contorller/hoster")
+const { propertyGET } = require("./contorller/property")
+const { bookingconfGET, bookingconfPOST } = require("./contorller/bookingconf")
+const { bookingconformedGET } = require("./contorller/bookingconformed")
+const { mybookingsGET } = require("./contorller/mybooking")
+const { mybookingsdetailsGET } = require("./contorller/mybookingdetails")
+const { helpGET } = require("./contorller/help")
 const { logoutGET } = require("./contorller/logout")
 const { UserDetail, HostedRoomDetails, BookedroomDetails } = require("./Schemas/schema")
 
@@ -53,9 +55,10 @@ mongoose.connect("mongodb://127.0.0.1/Users", { useNewUrlParser: true })
   .catch(err => console.log(err))
 
 
-// SignUp & Login page
+// Login page
 appRouter.route("/login").get(loginGET).post(loginPOST)
 
+// SignUp page
 appRouter.route("/signin").post(signinPOST)
 
 // logout page
@@ -89,18 +92,6 @@ appRouter.route("/mybooking/details").get(mybookingsdetailsGET)
 appRouter.route("/help").get(helpGET)
 
 
-
-app.get("", (req, res) => {
-  res.sendFile(path.join(__dirname, "../views/help.html"))
-})
-// appRouter.route("/contact").get(contactGET)
-
-// Admin page
-// appRouter.route("/Admin").get(adminGET)
-
-
-
-//conformed page
 
 // properity page showing to user
 
@@ -138,5 +129,7 @@ app.get("/fetchmybookedrooms", async (req, res) => {
   const result = await BookedroomDetails.find({ whoBooked: req.session.email }, {});
   res.json(result)
 })
+
+
 
 app.listen(4000)
