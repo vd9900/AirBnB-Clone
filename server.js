@@ -9,8 +9,9 @@ const { default: mongoose } = require("mongoose");
 const app = express();
 const appRouter = express.Router();
 
-const { signinPOST} = require("./routes/signin")
+const { signinPOST } = require("./routes/signin")
 const { loginGET, loginPOST } = require("./routes/login")
+const { logout } = require("./routes/logout")
 const { UserDetail, HostedRoomDetails, BookedroomDetails } = require("./Schemas/schema")
 
 //session
@@ -51,6 +52,10 @@ appRouter.route("/login").get(loginGET).post(loginPOST)
 
 appRouter.route("/signin").post(signinPOST)
 
+// logout page
+
+appRouter.route("/logout").get(logout)
+
 const lll = {
   name: "vinith",
 
@@ -73,17 +78,7 @@ app.get('/home', function (req, res) {
 //   })
 // })
 
-// logout page
-app.get("/logout", (req, res) => {
-  req.session.destroy((err) => {
-    if (err) {
-      console.log(err);
-      res.send("try again later")
-    } else {
-      res.redirect("/login")
-    }
-  })
-})
+
 
 
 //Hoster page
