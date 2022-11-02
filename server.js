@@ -9,9 +9,11 @@ const { default: mongoose } = require("mongoose");
 const app = express();
 const appRouter = express.Router();
 
-const { signinPOST } = require("./routes/signin")
-const { loginGET, loginPOST } = require("./routes/login")
-const { logout } = require("./routes/logout")
+const { signinPOST } = require("./contorller/signin")
+const { loginGET, loginPOST } = require("./contorller/login")
+const { propertyGET } = require("./contorller/login")
+const { mybookingsGET } = require("./contorller/login")
+const { logoutGET } = require("./contorller/logout")
 const { UserDetail, HostedRoomDetails, BookedroomDetails } = require("./Schemas/schema")
 
 //session
@@ -54,122 +56,23 @@ appRouter.route("/signin").post(signinPOST)
 
 // logout page
 
-appRouter.route("/logout").get(logout)
+appRouter.route("/logout").get(logoutGET)
 
-const lll = {
-  name: "vinith",
-
-}
-app.get('/home', function (req, res) {
-  if (req.session.isAuth) {
-    res.sendFile(path.join(__dirname, '../views/home.html'));
-    // console.log(req.session.isAuth);
-    // console.log(req.session.username);
-    // console.log(req.session.email);
-  } else {
-    res.redirect("/login")
-  }
-});
 // home page
-// appRouter.route("/").get(homeGET) 
-
-
-// app.post("/signin", 
-//   })
-// })
-
-
+appRouter.route("/home").get(homeGET)
 
 
 //Hoster page
-// appRouter.route("/hoster").get(productGET)
-app.get("/hoster", (req, res) => {
-  if (req.session.isAuth) {
-    res.sendFile(path.join(__dirname, "../views/hoster.html"))
-  } else {
-    res.redirect("/login")
-  }
-  console.log(req.session.isAuth)
-})
+appRouter.route("/hoster").get(hosterGET).post(hosterPOST)
 
-
-
-app.post("/hoster", gallery, async (req, res) => {
-  let properityId = 0;
-
-  if (await HostedRoomDetails.count({}) == 0) {
-    properityId = 1;
-  } else {
-    let newPropertiyId = await HostedRoomDetails.findOne().sort('-_id')
-    properityId = newPropertiyId.propertyId + 1;
-  }
-  // push images one by one into array
-  let imageData = [];
-  // for (let i = 0; i < req.files.length; i++) {
-  //     imageData.push(req.files[i].filename);
-  // }
-  // console.log(req.files);
-
-  const newHostedRoomDetails = new HostedRoomDetails({
-    propertyId: properityId,
-    owner: req.session.username,
-    propertyName: req.body.propertyName,
-    address: {
-      city: req.body.city,
-      state: req.body.state,
-      country: req.body.country
-    },
-    price: req.body.price,
-    size: req.body.size,
-    roomImage: imageData,
-    total: {
-      Bedrooms: req.body.totalBedrooms,
-      Beds: req.body.totalBeds,
-      Bathrooms: req.body.totalBathrooms,
-      Allowedpeople: req.body.totalGuest
-    },
-    mainTitle: req.body.mainTitle,
-    roomDescription: req.body.description,
-    amenities: {
-      indoor: req.body.indoor,
-      outdoor: req.body.outdoor,
-      essentials: req.body.essentials
-    }
-
-
-
-
-  })//.save((err) => {
-  //   if (err) {
-  //     res.send(`Something went Wrong try again😭 <a href="http://localhost:4000/home">back to home</a>`)
-  //   } else {
-  //     res.send(`<h2>Your post successfully added😊 <a href="http://localhost:4000/home">back to home</a><h2>`)
-  //   }
-  // })
-})
 
 //Product page
-// appRouter.route("/product").get(productGET)
-app.get("/property/:id", (req, res) => {
-  if (req.session.isAuth) {
-    // current clicked properity
-    if (req.session.clickedpro) {
-      delete req.session.clickedpro
-    }
-    req.session.clickedpro = req.params.id
+appRouter.route("/property/:id").get(propertyGET)
 
-    console.log(req.params.id);
-    res.sendFile(path.join(__dirname, "../views/product.html"))
-  } else {
-    res.redirect("/login")
-  }
-})
 
-// booking conformation page
 // my booking  page
-app.get("/mybookings", (req, res) => {
-  res.sendFile(path.join(__dirname, "../views/mybookings.html"))
-})
+appRouter.route("/mybookings").get(mybookingsGET)
+
 // my booking details  page
 
 app.get("/mybooking/details", (req, res) => {

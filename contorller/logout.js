@@ -1,6 +1,6 @@
 
 // GET method
-function logout(req, res) {
+function logoutGET(req, res) {
     req.session.destroy((err) => {
         if (err) {
             console.log(err);
@@ -10,4 +10,4 @@ function logout(req, res) {
         }
     })
 }
-module.exports = {logout}
+module.exports = {logoutGET}
