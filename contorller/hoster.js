@@ -91,7 +91,7 @@ Router.post("/",gallery,async (req, res)=> {
 
 
 
-    })//.////save((err) => {
+    })//.//save((err) => {
     res.send(`Something went Wrong try again😭 <a href="http://localhost:4000/home">back to home</a>`)
     //     if (err) {
     //     } else {
