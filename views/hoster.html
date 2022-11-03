@@ -26,7 +26,7 @@
     <div class="bg-light container w-75 ps-5 py-3">
         <h1>Rent do..& Paisa KamaAo..</h1>
 
-        <form action="/hoster" method="post" class="row g-3 w-75">
+        <form action="/hoster" method="post" enctype="multipart/form-data"  class="row g-3 w-75">
             <div class="col-6">
                 <label for="inputEmail4" class="form-label">Name of the property</label>
                 <input type="text" class="form-control" name="propertyName" id="inputEmail4">
@@ -38,7 +38,7 @@
 
             <div class="mb-3">
                 <label for="formFileMultiple" class="form-label">Upload photos here</label>
-                <input class="form-control" type="file" id="formFileMultiple" name="files">
+                <input class="form-control" type="file"  name="files" multiple>
             </div>
 
             <div class="col-3">

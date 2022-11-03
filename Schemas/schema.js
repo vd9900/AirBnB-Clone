@@ -83,7 +83,7 @@ const roomsdetailschema = new mongoose.Schema({
         type: Number
     },
     roomImage: {
-      type:Array
+        type: Array
     },
     total: {
         Bedrooms: {
@@ -157,13 +157,14 @@ const bookedRoomDetails = mongoose.Schema({
 const BookedroomDetails = new mongoose.model("BookedroomDetails", bookedRoomDetails)
 
 const reviewDetials = new mongoose.Schema({
-    userName : String,
-    stars:Number,
-    Description:String,
-    updated:{
-        type:Date,
-        default:Date.now
-    } 
+    userName: String,
+    stars: Number,
+    Description: String,
+    updated: {
+        type: Date,
+        default: Date.now
+    }
 
 })
-module.exports = { UserDetail, HostedRoomDetails, BookedroomDetails }
+const ReviewDetails = new mongoose.model("reviewDetails", reviewDetials)
+module.exports = { UserDetail, HostedRoomDetails, BookedroomDetails, ReviewDetails }

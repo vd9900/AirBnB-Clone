@@ -241,10 +241,11 @@
                                     </div>
                                 </div>
                             </div>
-
+                            
                         </div>
                     </div>
                 </div>
+                <form action="/rating" method="post">
                 <div class="container my-3">
                     <h3>reviews & feedback</h3>
                     <div class="mycontainer">
@@ -253,20 +254,8 @@
                             <div class="edit">EDIT</div>
                         </div>
                         <div class="star-widget">
-                            <input type="radio" name="rate" id="rate-5">
-                            <label for="rate-5" class="fas fa-star"></label>
-                            <input type="radio" name="rate" id="rate-4">
-                            <label for="rate-4" class="fas fa-star"></label>
-                            <input type="radio" name="rate" id="rate-3">
-                            <label for="rate-3" class="fas fa-star"></label>
-                            <input type="radio" name="rate" id="rate-2">
-                            <label for="rate-2" class="fas fa-star"></label>
-                            <input type="radio" name="rate" id="rate-1">
-                            <label for="rate-1" class="fas fa-star"></label>
-                            <form action="#">
-                                <header></header>
                                 <div class="textarea">
-                                    <textarea cols="30" placeholder="Describe your experience.."></textarea>
+                                    <textarea cols="30" name="describe" placeholder="Describe your experience.."></textarea>
                                 </div>
                                 <div class="btn mb-0">
                                     <button type="submit">Post</button>
@@ -274,10 +263,10 @@
                                 <div class="btn m-0">
                                     <button ><a href="http://localhost:4000/help" class="">Need help?</a></button>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
 

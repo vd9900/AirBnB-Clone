@@ -12,7 +12,6 @@ const appRouter = express.Router();
 const { signinPOST } = require("./contorller/signin")
 const { loginGET, loginPOST } = require("./contorller/login")
 const { homeGET } = require("./contorller/home")
-const { hosterGET, hosterPOST } = require("./contorller/hoster")
 const { propertyGET } = require("./contorller/property")
 const { bookingconfGET, bookingconfPOST } = require("./contorller/bookingconf")
 const { bookingconformedGET } = require("./contorller/bookingconformed")
@@ -20,8 +19,9 @@ const { mybookingsGET } = require("./contorller/mybooking")
 const { mybookingsdetailsGET } = require("./contorller/mybookingdetails")
 const { helpGET } = require("./contorller/help")
 const { logoutGET } = require("./contorller/logout")
-const { UserDetail, HostedRoomDetails, BookedroomDetails } = require("./Schemas/schema")
+const { UserDetail, HostedRoomDetails, BookedroomDetails,ReviewDetails } = require("./Schemas/schema")
 
+const hosterRoute = require("./contorller/hoster")
 //session
 app.set('trust proxy', 1) // trust first proxy
 app.use(session({
@@ -70,8 +70,8 @@ appRouter.route("/home").get(homeGET)
 
 
 //Hoster page
-appRouter.route("/hoster").get(hosterGET).post(hosterPOST)
 
+appRouter.use("/hoster",hosterRoute)
 
 //Product page
 appRouter.route("/property/:id").get(propertyGET)
@@ -86,7 +86,20 @@ appRouter.route("/conformed").get(bookingconformedGET)
 appRouter.route("/mybookings").get(mybookingsGET)
 
 // my booking details  page
-appRouter.route("/mybooking/details").get(mybookingsdetailsGET)
+appRouter.route("/mybooking/:id").get(mybookingsdetailsGET)
+
+// rating and reivews page
+
+app.post("/rating", (req, res) => {
+  console.log(req.body);
+  const NewreviewDetail = new ReviewDetails({
+    
+  })
+
+  res.send(`<h3>Thanks for your review🥰</h3>
+  <br>
+  <h4><a href="http://localhost:4000/home">Back to home</a></h4>`)
+})
 
 //contact page
 appRouter.route("/help").get(helpGET)
@@ -102,7 +115,8 @@ app.get("/fetchproperties", async (req, res) => {
 
 })
 app.get("/fetchproperty", async (req, res) => {
-  const result = await HostedRoomDetails.findOne({ propertyId: req.session.clickedpro }, {})
+  console.log(req.session.clickedpro)
+  const result = await HostedRoomDetails.findOne({ propertyId: req.params.id }, {})
   res.json(result)
 })
 app.get("/fetchbookedRoom", async (req, res) => {
@@ -129,6 +143,9 @@ app.get("/fetchmybookedrooms", async (req, res) => {
   const result = await BookedroomDetails.find({ whoBooked: req.session.email }, {});
   res.json(result)
 })
+
+
+
 
 
 

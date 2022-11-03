@@ -1,19 +1,51 @@
-
+const express = require("express")
+var session = require('express-session')
+const bodyParser = require("body-parser")
+const path = require('path')
+const multer = require('multer');
 const { HostedRoomDetails } = require("../Schemas/schema")
 
-function hosterGET(req, res) {
+const app = express();
+const Router = express.Router();
+
+//session
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+    secret: '1234676890dsafs',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false }
+}))
+
+// Middlewares
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded())
+
+
+// image storing path
+const galleryStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, './views/assets');
+    },
+    filename: (req, file, cb) => {
+        console.log(file);
+        cb(null, Date.now() + path.parse(file.originalname).name + path.extname(file.originalname));
+    }
+})
+
+const gallery = multer({ storage: galleryStorage }).array("files",5)
+
+Router.get("/",(req, res)=> {
     if (req.session.isAuth) {
         res.sendFile(path.join(__dirname, "../views/hoster.html"))
     } else {
         res.redirect("/login")
     }
     console.log(req.session.isAuth)
-}
+})
 
-
-async function hosterPOST(req, res) {
+Router.post("/",gallery,async (req, res)=> {
     let properityId = 0;
-
     if (await HostedRoomDetails.count({}) == 0) {
         properityId = 1;
     } else {
@@ -22,11 +54,14 @@ async function hosterPOST(req, res) {
     }
     // push images one by one into array
     let imageData = [];
-    // for (let i = 0; i < req.files.length; i++) {
-    //     imageData.push(req.files[i].filename);
-    // }
-    // console.log(req.files);
-
+    for (let i = 0; i < req.files.length; i++) {
+        imageData.push(req.files[i].filename);
+    }
+    console.log(imageData)
+     console.log(properityId)
+    console.log(req.session);
+    console.log(req.body);
+    
     const newHostedRoomDetails = new HostedRoomDetails({
         propertyId: properityId,
         owner: req.session.username,
@@ -56,14 +91,14 @@ async function hosterPOST(req, res) {
 
 
 
-    }).save((err) => {
-        if (err) {
-            res.send(`Something went Wrong try again😭 <a href="http://localhost:4000/home">back to home</a>`)
-        } else {
-            res.send(`<h2>Your post successfully added😊 <a href="http://localhost:4000/home">back to home</a><h2>`)
-        }
-    })
-}
+    })//.//save((err) => {
+    res.send(`Something went Wrong try again😭 <a href="http://localhost:4000/home">back to home</a>`)
+    //     if (err) {
+    //     } else {
+    //         res.send(`<h2>Your post successfully added😊 <a href="http://localhost:4000/home">back to home</a><h2>`)
+    //     }
+    // })
+})
 
 
-module.exports = { hosterGET, hosterPOST }
+module.exports =  Router 

@@ -115,7 +115,7 @@
 
                 // convert data to json
                 const data = await fetchs.json();
-
+console.log(data[0]);
                 if (data.length === 0) {
                     tableBody.innerHTML = `<h3>no booking yet</h3>
                      <br>
@@ -126,7 +126,7 @@
                     console.log(data.length);
                     for (i = 0; i < data.length; i++) {
                         // console.log(i);
-                        const tr = document.createElement("tr")
+                        // const tr = document.createElement("tr")
                       
                         // tr.innerHTML = `
                         // <!--  index-->
@@ -136,10 +136,10 @@
                         // <!-- Guestname-->
                         // <td>${data[i].GuestName}</td>
                         // <!-- Detail link-->
-                        // <td><a href="http://localhost:4000/mybooking/${data[i].__id}">Check more</a></td>
+                        // <td><a href="http://localhost:4000/mybooking/${data[i]._id}">Check more</a></td>
                         // `
                         // tableBody.appendChild(tr)
-                        // tableBody++;
+                        tableBody++;
                         console.log(i);
                         console.log(data[i]);
                     }

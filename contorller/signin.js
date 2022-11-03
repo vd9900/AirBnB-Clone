@@ -1,3 +1,5 @@
+const bcrypt = require("bcrypt")
+const { UserDetail } = require("../Schemas/schema")
 
 // post method
 function signinPOST(req, res) {

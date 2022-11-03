@@ -1,4 +1,6 @@
 const path = require("path");
+const bcrypt = require("bcrypt")
+
 const { UserDetail } = require("../Schemas/schema")
 
 // GET Method
