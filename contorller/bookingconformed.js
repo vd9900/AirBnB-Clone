@@ -6,6 +6,7 @@ const { BookedroomDetails } = require("../Schemas/schema")
 function bookingconformedGET(req, res) {
   console.log(req.session)
   console.log(req.session)
+  console.log(req.session)
   const newBookedroomDetails = new BookedroomDetails({
     GuestName: req.session.bookedRoom.GuestName,
     whoBooked: req.session.email,
