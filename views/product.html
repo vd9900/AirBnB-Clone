@@ -237,7 +237,7 @@
         const outdoor = document.querySelector(".outdoor")
         const essentials = document.querySelector(".essentials")
         async function fetchpropertydata() {
-
+console.log("jlasj");
             try {
                 // fetch data here
                 const fetchs = await fetch('http://localhost:4000/fetchproperty');
@@ -257,7 +257,7 @@
             }
             catch (err) {
                 // err
-                console.log(err)
+                console.log(err,"sladklksdfajdsklfjsdfkl")
             }
         }
         fetchpropertydata()

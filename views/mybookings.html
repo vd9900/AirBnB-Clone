@@ -123,23 +123,21 @@ console.log(data[0]);
                         <button class="btn btn-info">Book now</button> </a>`
                 } else {
                     let tableindex = 1;
-                    console.log(data.length);
                     for (i = 0; i < data.length; i++) {
-                        // console.log(i);
-                        // const tr = document.createElement("tr")
+                        const tr = document.createElement("tr")
                       
-                        // tr.innerHTML = `
-                        // <!--  index-->
-                        // <th scope="row">${tableindex}</th>
-                        // <!--Bookeddate-->
-                        // <td colspan="2">${data[i].roomDetails.updated}</td>
-                        // <!-- Guestname-->
-                        // <td>${data[i].GuestName}</td>
-                        // <!-- Detail link-->
-                        // <td><a href="http://localhost:4000/mybooking/${data[i]._id}">Check more</a></td>
-                        // `
-                        // tableBody.appendChild(tr)
-                        tableBody++;
+                        tr.innerHTML = `
+                        <!--  index-->
+                        <th scope="row">${tableindex}</th>
+                        <!--Bookeddate-->
+                        <td colspan="2">${data[i].roomDetails.updated}</td>
+                        <!-- Guestname-->
+                        <td>${data[i].GuestName}</td>
+                        <!-- Detail link-->
+                        <td><a href="http://localhost:4000/mybooking/${data[i]._id}">Check more</a></td>
+                        `
+                        tableBody.appendChild(tr)
+                        tableindex++;
                         console.log(i);
                         console.log(data[i]);
                     }
