@@ -154,6 +154,10 @@ app.get("/fetchbookedRoom", async (req, res) => {
   res.send(req.session.bookedRoom)
 })
 //  creating api for my booking properties
+//  creating api for my booking properties
+//  creating api for my booking properties
+//  creating api for my booking properties
+//  creating api for my booking properties
 
 app.get("/fetchmybookedrooms", async (req, res) => {
   const result = await BookedroomDetails.find({ whoBooked: req.session.email }, {});
