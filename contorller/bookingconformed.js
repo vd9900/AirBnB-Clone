@@ -3,10 +3,10 @@ const { BookedroomDetails } = require("../Schemas/schema")
 
 
 
-function bookingconformedGET(req, res) {
-  console.log(req.session.bookedRoom)
-  console.log(req.session.roomDetails)
-  const newBookedroomDetails = new BookedroomDetails({
+async function bookingconformedGET(req, res) {
+  console.log(req.session.bookedRoom.roomDetails)
+  // console.log(req.session.roomDetails)
+  const newBookedroomDetails = await new BookedroomDetails({
     GuestName: req.session.bookedRoom.GuestName,
     whoBooked: req.session.email,
     CheckIn: req.session.bookedRoom.CheckIn,
@@ -14,12 +14,14 @@ function bookingconformedGET(req, res) {
     Nop: req.session.bookedRoom.Nop,
     Non: req.session.bookedRoom.Non,
     Payment: req.session.bookedRoom.Payment,
+    Price: req.session.bookedRoom.totalPrice,
     roomDetails: {
-      propertyId: req.session.clickedpro,
-      propertyName: req.session.bookedRoom.propertyName,
-      city: req.session.bookedRoom.city,
-      country: req.session.bookedRoom.country,
-      updated: req.session.bookedRoom.updated,
+      propertyId: req.session.bookedRoom.roomDetails.propertyId,
+      propertyName: req.session.bookedRoom.roomDetails.propertyName,
+      mainTitle: req.session.bookedRoom.roomDetails.mainTitle,
+      city: req.session.bookedRoom.roomDetails.city,
+      country: req.session.bookedRoom.roomDetails.country,
+      updated: req.session.bookedRoom.roomDetails.updated,
     }
   }).save(
     (err) => {

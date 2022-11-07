@@ -81,14 +81,14 @@
                     </thead>
                     <tbody class="tableBody">
                         <!-- users  details -->
-                        <!-- <tr>
+                         <!-- <tr>
                             <th scope="row">1</th>
                             <td>big house</td>
                             <td>good</td>
                             <td>19000</td>
                             <td><a href="http://localhost:4000/mybooking/details">Check more</a></td>
-                        </tr>
-                        <tr>
+                        </tr> -->
+                        <!-- <tr>
                             <th scope="row">2</th>
                             <td>Jacob</td>
                             <td>Thornton</td>
@@ -98,7 +98,7 @@
                             <th scope="row">3</th>
                             <td colspan="2">Larry the Bird</td>
                             <td>@twitter</td>
-                        </tr> -->
+                        </tr> --> -->
                     </tbody>
                 </table>
             </div>
@@ -115,7 +115,6 @@
 
                 // convert data to json
                 const data = await fetchs.json();
-console.log(data[0]);
                 if (data.length === 0) {
                     tableBody.innerHTML = `<h3>no booking yet</h3>
                      <br>
@@ -123,19 +122,23 @@ console.log(data[0]);
                         <button class="btn btn-info">Book now</button> </a>`
                 } else {
                     let tableindex = 1;
-                console.log(data.length);
+                    console.log(data.length);
                     for (i = 0; i < data.length; i++) {
+                        const bookedTime = new Date(data[i].roomDetails.updated)
+                        console.log(bookedTime);
                         const tr = document.createElement("tr")
-                      
+
                         tr.innerHTML = `
                         <!--  index-->
                         <th scope="row">${tableindex}</th>
+                        <!--property-->
+                        <td >${data[i].roomDetails.propertyName}</td>
                         <!--Bookeddate-->
-                        <td colspan="2">${data[i].roomDetails.updated}</td>
+                        <td >${(bookedTime.getDate()>10?bookedTime.getDate():`0${bookedTime.getDate()}`)}-${bookedTime.getMonth()+1}-${bookedTime.getFullYear()}</td>
                         <!-- Guestname-->
                         <td>${data[i].GuestName}</td>
                         <!-- Detail link-->
-                        <td><a href="http://localhost:4000/mybooking/${data[i]._id}">Check more</a></td>
+                        <td><a href="http://localhost:4000/mybooking?id=${data[i]._id}">Check more</a></td>
                         `
                         tableBody.appendChild(tr)
                         tableindex++;

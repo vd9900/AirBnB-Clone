@@ -137,15 +137,16 @@ const bookedRoomDetails = mongoose.Schema({
     CheckOut: String,
     Nop: String,
     Non: String,
+    Price:Number,
     Payment: String,
     roomDetails: {
         propertyId: String,
         propertyName: String,
+        mainTitle:String,
         city: String,
         country: String,
         updated: String,
     },
-    totalPrice: Number,
     updated: {
         type: Date,
         default: Date.now
@@ -158,7 +159,7 @@ const BookedroomDetails = new mongoose.model("BookedroomDetails", bookedRoomDeta
 
 const reviewDetials = new mongoose.Schema({
     userName: String,
-    stars: Number,
+    propertyId: Number,
     Description: String,
     updated: {
         type: Date,

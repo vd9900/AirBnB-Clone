@@ -90,7 +90,7 @@ appRouter.get("/property", function propertyGET(req, res) {
 })
 
 appRouter.get("/fetchproperty", async (req, res) => {
-  const result = await HostedRoomDetails.findOne({ propertyId:req.session.clickedpro }, {})
+  const result = await HostedRoomDetails.findOne({ propertyId: req.session.clickedpro }, {})
   res.json(result)
 })
 
@@ -104,19 +104,30 @@ appRouter.route("/conformed").get(bookingconformedGET)
 appRouter.route("/mybookings").get(mybookingsGET)
 
 // my booking details  page
-appRouter.route("/mybooking/:id").get(mybookingsdetailsGET)
+appRouter.route("/mybooking").get(mybookingsdetailsGET)
 
 // rating and reivews page
 
-app.post("/rating", (req, res) => {
-  console.log(req.body);
+app.post("/rating", async (req, res) => {
+  console.log(req.body.describe);
+  console.log(req.session.username);
+  console.log(req.session.clickedbookedroomId);
+  const id = req.session.clickedbookedroomId
+  const result = await BookedroomDetails.findOne({ _id: id }, {});
+  console.log(result.roomDetails.propertyId);
   const NewreviewDetail = new ReviewDetails({
+    userName: req.session.username,
+    propertyId: result.roomDetails.propertyId,
+    Description: req.body.describe
+  }).save((err) => {
+    if (err) {
+      res.send(`Something went Wrong try again😭 <a href="http://localhost:4000/home">back to home</a>`)
+      console.log(err)
+    } else {
+      res.send(`<h3>Thanks for your review🥰</h3> <a href="http://localhost:4000/home">back to home</a>`)
+    }
 
   })
-
-  res.send(`<h3>Thanks for your review🥰</h3>
-  <br>
-  <h4><a href="http://localhost:4000/home">Back to home</a></h4>`)
 })
 
 //contact page
@@ -162,8 +173,15 @@ app.get("/fetchmybookedrooms", async (req, res) => {
 })
 
 
+app.get("/fetchmybookedroom", async (req, res) => {
+  const id = req.session.clickedbookedroomId
+  const result = await BookedroomDetails.find({ _id: id }, {});
+  res.json(result)
+})
 
-
-
+app.get("/fetchreivewproduct",async (req,res)=>{
+  const result = await ReviewDetails.find({ propertyId: req.session.clickedpro }, {})
+  res.json(result) 
+})
 
 app.listen(4000)

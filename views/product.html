@@ -212,6 +212,12 @@
                         </div>
                     </form>
                 </div>
+                <div class="container px-2 py-4" id="reviewcontainer">
+                    <h3>feedback&reviews</h3>  
+                    <!-- <div class="container p-2 border border-3 border-dark w-50 ms-0 my-4"> -->
+                       
+                    <!-- </div>   -->
+                </div>
             </div>
         </div>
         </div>
@@ -236,15 +242,19 @@
         const indoor = document.querySelector(".indoor")
         const outdoor = document.querySelector(".outdoor")
         const essentials = document.querySelector(".essentials")
+
+        //review container
+        const reviewContainer = document.getElementById("reviewcontainer")
         async function fetchpropertydata() {
-console.log("jlasj");
             try {
                 // fetch data here
                 const fetchs = await fetch('http://localhost:4000/fetchproperty');
+                const reviewFetch = await fetch('http://localhost:4000/fetchreivewproduct');
 
                 // convert  json to data
                 const data = await fetchs.json();
-                console.log(data);
+                const reviewData = await reviewFetch.json();
+                // console.log(reviewData);
                 propertyName.innerHTML = data.propertyName;
                 mainTitle.innerHTML = data.mainTitle;
                 ownerName.innerHTML = data.owner;
@@ -252,8 +262,38 @@ console.log("jlasj");
                 roomDescription.innerHTML = data.roomDescription;
                 guest.innerHTML = data.total.Allowedpeople;
                 beds.innerHTML = data.total.Beds;
-                Bedrooms.innerHTML = data.total.Bedrooms;
+                bedRooms.innerHTML = data.total.Bedrooms;
                 bathRooms.innerHTML = data.total.Bathrooms;
+                if(reviewData.length==0){
+                    const div = document.createElement("div")
+                    div.classList.add("d-flex","justify-content-center")
+                    div.innerHTML = `<h4>No commits yet</h4>`
+                    reviewContainer.appendChild(div)
+                }
+
+                // review container
+                for (let i = 0; i < reviewData.length; i++) {
+                    console.log( reviewData[i])
+                    const div = document.createElement("div")
+                    const updatedTime = new Date(reviewData[i].updated)
+                    console.log(updatedTime);
+                    div.classList.add("container","p-2","border","border-dark","w-50","ms-0","mt-4")
+                    div.innerHTML = `
+                    <p class="mb-0">
+                           UserName: <b>
+                               <span>${reviewData[i].userName}</span>
+
+                           </b>
+                       </p>
+                       <p class="mb-0">
+                        description: <span>${reviewData[i].Description}</span>
+                       </p> 
+                       <p class="mb-0">
+                        posted on: <span>${(updatedTime.getDate()>10?updatedTime.getDate():`0${updatedTime.getDate()}`)}-${updatedTime.getMonth()+1}-${updatedTime.getFullYear()}</span>
+                       </p> 
+                    `            
+                    reviewContainer.appendChild(div)       
+                }
             }
             catch (err) {
                 // err

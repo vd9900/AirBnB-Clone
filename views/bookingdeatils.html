@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>my booking details</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 </head>
@@ -173,7 +173,8 @@
 
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="container-fluid">
-                <span><a href="http://localhost:4000/home" class="text-decoration-none text-danger fs-2">AirBnB</a></span>
+                <span><a href="http://localhost:4000/home"
+                        class="text-decoration-none text-danger fs-2">AirBnB</a></span>
                 <div class="ms-auto me-3">
                     <span class="w-70 me-3"><a href="/hoster">Become a hoster</a></span>
                     <span class="w-70 me-3">Welcome Vinith</span>
@@ -187,12 +188,12 @@
             <!-- post component -->
             <div style="width:76vw;" class="bg-light m-auto px-3">
                 <!-- post title -->
-                <h1>big house here</h1>
+                <h1 id="propertyname"></h1>
                 <!-- place -->
-                <h3>Mumbai, India</h3>
+                <h3><span id="city"></span>,<span id="country"></span></h3>
 
                 <!--  tumbmail -->
-                <h2 class="my-4">Luxury stay in Baa Atoll, North Province, Maldives</h2>
+                <h2 class="my-4" id="maintitle"></h2>
                 <div class="wrapper mt-5">
                     <div class="row d-flex justify-content-between">
                         <div class="col-lg-7 col-md-12">
@@ -222,17 +223,17 @@
                                     <!-- no of nights stay -->
                                     <div class="col-lg-6 col-md-12 mt-3">
                                         <label for="non" class="form-label">No of nights</label>
-                                        <input type="number" class="form-control" id="non" name="Non" readonly>
+                                        <input type="text" class="form-control" id="non" name="Non" readonly>
                                     </div>
                                     <div class="col-lg-6 col-md-12 mt-3">
                                         <label for="totalPrice" class="form-label">Total Price</label>
-                                        <input type="number" class="form-control" id="totalPrice" name="Totalprice"
+                                        <input type="text" class="form-control" id="totalPrice" name="Totalprice"
                                             readonly>
                                     </div>
                                     <!-- payment method -->
                                     <div class="col-lg-6 col-md-12 mt-3">
                                         <label for="payment" class="form-label">Payment option</label>
-                                        <input type="text" class="form-control" id="payment" name="Checkout" readonly>
+                                        <input type="text" class="form-control" id="payment" readonly>
                                     </div>
                                     <!-- button from backend -->
                                     <div
@@ -241,27 +242,28 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
                 <form action="/rating" method="post">
-                <div class="container my-3">
-                    <h3>reviews & feedback</h3>
-                    <div class="mycontainer">
-                        <div class="post">
-                            <div class="text">Thanks for rating us!</div>
-                            <div class="edit">EDIT</div>
-                        </div>
-                        <div class="star-widget">
+                    <div class="container my-3">
+                        <h3>reviews & feedback</h3>
+                        <div class="mycontainer">
+                            <div class="post">
+                                <div class="text">Thanks for rating us!</div>
+                                <div class="edit">EDIT</div>
+                            </div>
+                            <div class="star-widget">
                                 <div class="textarea">
-                                    <textarea cols="30" name="describe" placeholder="Describe your experience.."></textarea>
+                                    <textarea cols="30" name="describe"
+                                        placeholder="Describe your experience.."></textarea>
                                 </div>
                                 <div class="btn mb-0">
                                     <button type="submit">Post</button>
                                 </div>
                                 <div class="btn m-0">
-                                    <button ><a href="http://localhost:4000/help" class="">Need help?</a></button>
+                                    <button><a href="http://localhost:4000/help" class="">Need help?</a></button>
                                 </div>
                             </div>
                         </div>
@@ -272,6 +274,45 @@
 
     </section>
     <!-- Javascript code for rating -->
+    <script>
+        async function fetchbookedroom() {
+            try {
+                // fetch data here
+                const fetchs = await fetch('http://localhost:4000/fetchmybookedroom')
+                // convert data to json
+                const dataArray = await fetchs.json();
+                const data = dataArray[0]
+                console.log(data);
+                const mainTitle = document.getElementById("maintitle")
+                const country = document.getElementById("country")
+                const city = document.getElementById("city")
+                const propertyName = document.getElementById("propertyname")
+                const non = document.getElementById("non")
+                const nop = document.getElementById("nop")
+                const GuestName = document.getElementById("guestName")
+                const checkIn = document.getElementById("checkIn")
+                const checkOut = document.getElementById("checkOut")
+                const price = document.getElementById("totalPrice")
+                const payment = document.getElementById("payment")
+                mainTitle.innerText = data.roomDetails.mainTitle
+                country.innerText = data.roomDetails.country
+                city.innerText = data.roomDetails.city
+                propertyName.value = data.roomDetails.propertyName
+                non.value = data.Non
+                nop.value = data.Nop
+                GuestName.value = data.GuestName
+                checkIn.value = data.CheckIn
+                checkOut.value = data.CheckOut
+                price.value = data.Price
+                payment.value = data.Payment
+            }
+            catch (err) {
+                // err
+                console.log(err)
+            }
+        }
+        fetchbookedroom()
+    </script>
     <script>
         const btn = document.querySelector("button");
         const post = document.querySelector(".post");
