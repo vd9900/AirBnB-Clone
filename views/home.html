@@ -13,7 +13,7 @@
         width: 333px;
         height: auto;
     }
-</style>
+    </style>
 
 <body>
     <nav class="navbar navbar-expand-lg bg-light">
@@ -57,10 +57,11 @@
 
                 // create cards here
                 for (let i = 0; i < data.length; i++) {
+                    console.log(data[i].roomImage[1])
                     const Maincard = document.createElement('div');
                     Maincard.classList.add("cards", "bg-light","col-sm-12", "col-md-6", "col-lg-3", "my-3");
-                    const card = `<a href="http://localhost:4000/property/${data[i].propertyId}" class="text-decoration-none text-black"><div class="img">
-                <img class="card-img-top" src="./assets" alt="Card image cap">
+                    const card = `<a href="http://localhost:4000/property?id=${data[i].propertyId}" class="text-decoration-none text-black"><div class="img">
+                <img class="card-img-top" src="./assets/${data[i].roomImage[1]}" alt="Card image cap">
             </div>
             <div class="cards-detail my-2">
                 <div class="card-heading d-flex justify-content-between">

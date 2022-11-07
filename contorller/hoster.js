@@ -17,10 +17,6 @@ app.use(session({
     cookie: { secure: false }
 }))
 
-// Middlewares
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded())
-
 
 // image storing path
 const galleryStorage = multer.diskStorage({
@@ -91,14 +87,12 @@ Router.post("/",gallery,async (req, res)=> {
 
 
 
-    })//./save((err) => {
-    res.send(`Something went Wrong try again😭 <a href="http://localhost:4000/home">back to home</a>`)
-    //     if (err) {
-    //     } else {
-    //         res.send(`<h2>Your post successfully added😊 <a href="http://localhost:4000/home">back to home</a><h2>`)
-    //     }
-    // })
+    }).save((err) => {
+        if (err) {
+             res.send(`Something went Wrong try again😭 <a href="http://localhost:4000/home">back to home</a>`)
+         } else {
+             res.send(`<h2>Your post successfully added😊 <a href="http://localhost:4000/home">back to home</a><h2>`)
+         }
+     })
 })
-
-
-module.exports =  Router 
+module.exports =  Router

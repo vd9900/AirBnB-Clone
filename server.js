@@ -4,9 +4,26 @@ const moongose = require("mongoose")
 const path = require("path");
 const multer = require('multer');
 var session = require('express-session')
+var cookieParser = require('cookie-parser');
 const { default: mongoose } = require("mongoose");
 const app = express();
 const appRouter = express.Router();
+
+//session
+app.set('trust proxy', 1) // trust first proxy)
+app.use(session({
+  secret: '1234676890dsafs',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: false }
+}))
+
+// Middlewares
+app.use(bodyParser.json())
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use("/", appRouter)
+
 
 const { signinPOST } = require("./contorller/signin")
 const { loginGET, loginPOST } = require("./contorller/login")
@@ -22,19 +39,6 @@ const { UserDetail, HostedRoomDetails, BookedroomDetails, ReviewDetails } = requ
 const propertyRoute = require("./contorller/property")
 const hosterRoute = require("./contorller/hoster");
 const { nextTick } = require("process");
-//session
-app.set('trust proxy', 1) // trust first proxy
-app.use(session({
-  secret: '1234676890dsafs',
-  resave: false,
-  saveUninitialized: false,
-  cookie: { secure: false }
-}))
-
-// Middlewares
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded())
-app.use("/", appRouter)
 
 // image storing path
 const galleryStorage = multer.diskStorage({
@@ -74,17 +78,10 @@ appRouter.route("/home").get(homeGET)
 appRouter.use("/hoster", hosterRoute)
 
 //Product page
-appRouter.get("/property/:id", async function propertyGET(req, res) {
+appRouter.get("/property", function propertyGET(req, res) {
   if (req.session.isAuth) {
-    // current clicked properity
-
-    if (await req.session.clickedpro) {
-      delete req.session.clickedpro
-    }
-    req.session.clickedpro = req.params.id
-    console.log(req.session.clickedpro)
-    console.log(req.params.id);
-    console.log(req.originalUrl)
+    req.session.clickedpro = req.query.id
+    // console.log(req.cookies)
     res.sendFile(path.join(__dirname, "./views/product.html"))
   } else {
     res.redirect("/login")
@@ -93,9 +90,7 @@ appRouter.get("/property/:id", async function propertyGET(req, res) {
 })
 
 appRouter.get("/fetchproperty", async (req, res) => {
-  console.log(req.session);
-  console.log(req.session.clickedpro)
-  const result = await HostedRoomDetails.findOne({ propertyId: req.session.clickedpro}, {})
+  const result = await HostedRoomDetails.findOne({ propertyId:req.session.clickedpro }, {})
   res.json(result)
 })
 
@@ -141,6 +136,7 @@ app.get("/fetchproperties", async (req, res) => {
 app.get("/fetchbookedRoom", async (req, res) => {
   console.log(req.session);
   const result = await HostedRoomDetails.findOne({ propertyId: req.session.clickedpro }, {})
+  console.log(result);
   req.session.bookedRoom.roomDetails = {
     propertyName: result.propertyName,
     propertyId: req.session.clickedpro,
