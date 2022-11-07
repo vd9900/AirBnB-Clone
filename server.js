@@ -155,7 +155,6 @@ app.get("/fetchbookedRoom", async (req, res) => {
 })
 //  creating api for my booking properties
 //  creating api for my booking properties
-//  creating api for my booking properties
 
 
 app.get("/fetchmybookedrooms", async (req, res) => {
