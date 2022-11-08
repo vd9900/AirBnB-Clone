@@ -22,13 +22,12 @@
             <div class="ms-auto me-3">
                 <span class="w-70 me-3"><a href="http://localhost:4000/hoster">Become a hoster</a></span>
                 <span class="w-70 me-3"><a href="http://localhost:4000/mybookings">my booking's</a></span>
-                <span class="w-70 me-3">Welcome Vinith</span>
-                <button type="button" class="btn btn-outline-primary">Edit Profile</button>
                 <button type="button" class="btn btn-outline-danger ms-2"><a href="/logout"
                         class="text-decoration-none text-dark">Logout</a></button>
             </div>
 
-
+            <img src="./assets/1667852644329544585-flower-nature-plant-beautiful-petals-colorful-flowers.jpg" alt="sdfsda">
+            <!-- <img src="https://th.bing.com/th/id/OIP.1YM53mG10H_U25iPjop83QHaEo?pid=ImgDet&rs=1" width="" alt="king"> -->
         </div>
     </nav>
     <!-- posts section -->
@@ -57,7 +56,7 @@
 
                 // create cards here
                 for (let i = 0; i < data.length; i++) {
-                    console.log(data[i].roomImage[1])
+                    // console.log(data[i].roomImage[1])
                     const Maincard = document.createElement('div');
                     Maincard.classList.add("cards", "bg-light","col-sm-12", "col-md-6", "col-lg-3", "my-3");
                     const card = `<a href="http://localhost:4000/property?id=${data[i].propertyId}" class="text-decoration-none text-black"><div class="img">

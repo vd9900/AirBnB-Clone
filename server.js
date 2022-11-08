@@ -36,6 +36,7 @@ const { helpGET } = require("./contorller/help")
 const { logoutGET } = require("./contorller/logout")
 const { UserDetail, HostedRoomDetails, BookedroomDetails, ReviewDetails } = require("./Schemas/schema")
 
+const  ratingRoute = require("./contorller/rating")
 const propertyRoute = require("./contorller/property")
 const hosterRoute = require("./contorller/hoster");
 const { nextTick } = require("process");
@@ -74,25 +75,12 @@ appRouter.route("/home").get(homeGET)
 
 
 //Hoster page
-
 appRouter.use("/hoster", hosterRoute)
 
 //Product page
-appRouter.get("/property", function propertyGET(req, res) {
-  if (req.session.isAuth) {
-    req.session.clickedpro = req.query.id
-    // console.log(req.cookies)
-    res.sendFile(path.join(__dirname, "./views/product.html"))
-  } else {
-    res.redirect("/login")
-  }
+appRouter.use("/property", propertyRoute)
 
-})
 
-appRouter.get("/fetchproperty", async (req, res) => {
-  const result = await HostedRoomDetails.findOne({ propertyId: req.session.clickedpro }, {})
-  res.json(result)
-})
 
 // my booking conformation  page
 appRouter.route("/property/bookingconf").get(bookingconfGET).post(bookingconfPOST)
@@ -107,28 +95,8 @@ appRouter.route("/mybookings").get(mybookingsGET)
 appRouter.route("/mybooking").get(mybookingsdetailsGET)
 
 // rating and reivews page
+appRouter.use("/rating", ratingRoute)
 
-app.post("/rating", async (req, res) => {
-  console.log(req.body.describe);
-  console.log(req.session.username);
-  console.log(req.session.clickedbookedroomId);
-  const id = req.session.clickedbookedroomId
-  const result = await BookedroomDetails.findOne({ _id: id }, {});
-  console.log(result.roomDetails.propertyId);
-  const NewreviewDetail = new ReviewDetails({
-    userName: req.session.username,
-    propertyId: result.roomDetails.propertyId,
-    Description: req.body.describe
-  }).save((err) => {
-    if (err) {
-      res.send(`Something went Wrong try again😭 <a href="http://localhost:4000/home">back to home</a>`)
-      console.log(err)
-    } else {
-      res.send(`<h3>Thanks for your review🥰</h3> <a href="http://localhost:4000/home">back to home</a>`)
-    }
-
-  })
-})
 
 //contact page
 appRouter.route("/help").get(helpGET)
@@ -136,6 +104,11 @@ appRouter.route("/help").get(helpGET)
 
 
 // properity page showing to user
+
+appRouter.get("/fetchproperty", async (req, res) => {
+  const result = await HostedRoomDetails.findOne({ propertyId: req.session.clickedpro }, {})
+  res.json(result)
+})
 
 // fecthing data to front-end
 app.get("/fetchproperties", async (req, res) => {

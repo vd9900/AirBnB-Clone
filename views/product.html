@@ -54,11 +54,10 @@
 
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="container-fluid">
-                <span><a href="http://localhost:4000/home" class="text-decoration-none text-danger fs-2">AirBnB</a></span>
+                <span><a href="http://localhost:4000/home"
+                        class="text-decoration-none text-danger fs-2">AirBnB</a></span>
                 <div class="ms-auto me-3">
                     <span class="w-70 me-3"><a href="/hoster">Become a hoster</a></span>
-                    <span class="w-70 me-3">Welcome Vinith</span>
-                    <button type="button" class="btn btn-outline-primary">Edit Profile</button>
                     <button type="button" class="btn btn-outline-danger ms-2"><a href="/logout"
                             class="text-decoration-none text-dark">Logout</a></button>
                 </div>
@@ -80,19 +79,8 @@
                 <h3><span class="city"></span> <span class="country"></span></h3>
                 <!-- imgs -->
                 <div style="width:700px;" id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="https://th.bing.com/th/id/OIP.xmc9vpdxmqD2SLr-WUZtzAHaEo?pid=ImgDet&rs=1"
-                                class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="https://th.bing.com/th/id/OIP.qLVYj_t-HU2Yyx3v_wFgLwHaE6?w=283&h=188&c=7&r=0&o=5&dpr=1.25&pid=1.7"
-                                class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="https://th.bing.com/th/id/OIP.xmc9vpdxmqD2SLr-WUZtzAHaEo?pid=ImgDet&rs=1"
-                                class="d-block w-100" alt="...">
-                        </div>
+                    <div class="carousel-inner" id="images">
+
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
                         data-bs-slide="prev">
@@ -132,37 +120,40 @@
                 <h4>Amenities</h4>
                 <div class="d-flex gap-3">
                     <!-- outdoor -->
-                    <ul class="list-group">
-                        <li class="list-group-item bg-dark text-light fw-bold" aria-current="true">Outdoor</li>
-                        <li class="list-group-item">A second item</li>
+                    <ul class="list-group" id="outdoor">
+                        <li class="list-group-item bg-dark text-light fw-bold" aria-current="true">Outdoor
+                        </li>
+                        <!-- <li class="list-group-item">A second item</li>
                         <li class="list-group-item">A third item</li>
                         <li class="list-group-item">A fourth item</li>
-                        <li class="list-group-item">And a fifth one</li>
+                        <li class="list-group-item">And a fifth one</li> -->
                     </ul>
                     <!-- indoor -->
-                    <ul class="list-group">
-                        <li class="list-group-item bg-dark text-light fw-bold" aria-current="true">Indoor</li>
-                        <li class="list-group-item">A second item</li>
+                    <ul class="list-group" id="indoor">
+                        <li class="list-group-item bg-dark text-light fw-bold" aria-current="true">Indoor
+                        </li>
+                        <!-- <li class="list-group-item">A second item</li>
                         <li class="list-group-item">A third item</li>
                         <li class="list-group-item">A fourth item</li>
-                        <li class="list-group-item">And a fifth one</li>
+                        <li class="list-group-item">And a fifth one</li> -->
                     </ul>
                     <!-- Essentials -->
-                    <ul class="list-group">
-                        <li class="list-group-item bg-dark text-light fw-bold" aria-current="true">Essentials</li>
-                        <li class="list-group-item">A second item</li>
+                    <ul class="list-group" id="essentials">
+                        <li class="list-group-item bg-dark text-light fw-bold" aria-current="true">
+                            Essentials</li>
+                        <!-- <li class="list-group-item">A second item</li>
                         <li class="list-group-item">A third item</li>
                         <li class="list-group-item">A fourth item</li>
-                        <li class="list-group-item">And a fifth one</li>
+                        <li class="list-group-item">And a fifth one</li> -->
                     </ul>
                 </div>
 
                 <!-- hoster details -->
-                <div style="height: 45px;" class="d-flex align-items-center bg-danger ps-3 mt-3 w-50">
+                <div style="height: 45px;" class="d-flex align-items-center border border-dark ps-3 mt-3 w-50">
                     <!-- user image -->
-                    <span></span>
+                    <!-- <span></span> -->
                     <!-- user name -->
-                    <span class="ownerName"></span>
+                    <p class="m-0">Owner: <span class="ownerName"></span> </p>
                 </div>
                 <!-- booking form -->
                 <div class="col-lg-5 col-md-12 my-3 border border-dark rounded">
@@ -213,9 +204,9 @@
                     </form>
                 </div>
                 <div class="container px-2 py-4" id="reviewcontainer">
-                    <h3>feedback&reviews</h3>  
+                    <h3>feedback&reviews</h3>
                     <!-- <div class="container p-2 border border-3 border-dark w-50 ms-0 my-4"> -->
-                       
+
                     <!-- </div>   -->
                 </div>
             </div>
@@ -239,9 +230,12 @@
         const bedRooms = document.querySelector(".bedRooms")
         const bathRooms = document.querySelector(".bathRooms")
         const roomDescription = document.querySelector(".roomDescription")
-        const indoor = document.querySelector(".indoor")
-        const outdoor = document.querySelector(".outdoor")
-        const essentials = document.querySelector(".essentials")
+        const indoor = document.getElementById("indoor")
+        const outdoor = document.getElementById("outdoor")
+        const essentials = document.getElementById("essentials")
+        const images = document.getElementById("images")
+
+
 
         //review container
         const reviewContainer = document.getElementById("reviewcontainer")
@@ -254,7 +248,7 @@
                 // convert  json to data
                 const data = await fetchs.json();
                 const reviewData = await reviewFetch.json();
-                // console.log(reviewData);
+                // fetching all product deatils
                 propertyName.innerHTML = data.propertyName;
                 mainTitle.innerHTML = data.mainTitle;
                 ownerName.innerHTML = data.owner;
@@ -264,20 +258,65 @@
                 beds.innerHTML = data.total.Beds;
                 bedRooms.innerHTML = data.total.Bedrooms;
                 bathRooms.innerHTML = data.total.Bathrooms;
-                if(reviewData.length==0){
+                console.log(data);
+                console.log(data.roomImage);
+                //fecthing amenitels
+                //indoor
+                images.innerHTML = `
+                        <div class="carousel-item active">
+                            <img src="./assets/${data.roomImage[0]}"
+                                class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./assets/${data.roomImage[1]}"
+                                class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./assets/${data.roomImage[2]}"
+                                class="d-block w-100" alt="...">
+                        </div>
+                `
+                for (let i = 0; i < data.amenities.indoor.length; i++) {
+                    const li = document.createElement("li")
+                    li.classList.add("list-group-item")
+                    li.innerHTML = `${data.amenities.indoor[i]}`;
+                    indoor.appendChild(li)
+
+                }
+                //outdoor
+                for (let i = 0; i < data.amenities.outdoor.length; i++) {
+                    const li = document.createElement("li")
+                    li.classList.add("list-group-item")
+                    li.innerHTML = `${data.amenities.outdoor[i]}`;
+                    outdoor.appendChild(li)
+                    console.log(li);
+
+                }
+                //essentials
+                for (let i = 0; i < data.amenities.essentials.length; i++) {
+                    const li = document.createElement("li")
+                    li.classList.add("list-group-item")
+                    li.innerHTML = `${data.amenities.essentials[i]}`;
+                    essentials.appendChild(li)
+
+                }
+
+
+
+
+
+                if (reviewData.length == 0) {
                     const div = document.createElement("div")
-                    div.classList.add("d-flex","justify-content-center")
+                    div.classList.add("d-flex", "justify-content-center")
                     div.innerHTML = `<h4>No commits yet</h4>`
                     reviewContainer.appendChild(div)
                 }
 
                 // review container
                 for (let i = 0; i < reviewData.length; i++) {
-                    console.log( reviewData[i])
                     const div = document.createElement("div")
                     const updatedTime = new Date(reviewData[i].updated)
-                    console.log(updatedTime);
-                    div.classList.add("container","p-2","border","border-dark","w-50","ms-0","mt-4")
+                    div.classList.add("container", "p-2", "border", "border-dark", "w-50", "ms-0", "mt-4")
                     div.innerHTML = `
                     <p class="mb-0">
                            UserName: <b>
@@ -289,15 +328,15 @@
                         description: <span>${reviewData[i].Description}</span>
                        </p> 
                        <p class="mb-0">
-                        posted on: <span>${(updatedTime.getDate()>10?updatedTime.getDate():`0${updatedTime.getDate()}`)}-${updatedTime.getMonth()+1}-${updatedTime.getFullYear()}</span>
+                        posted on: <span>${(updatedTime.getDate() > 10 ? updatedTime.getDate() : `0${updatedTime.getDate()}`)}-${updatedTime.getMonth() + 1}-${updatedTime.getFullYear()}</span>
                        </p> 
-                    `            
-                    reviewContainer.appendChild(div)       
+                    `
+                    reviewContainer.appendChild(div)
                 }
             }
             catch (err) {
                 // err
-                console.log(err,"sladklksdfajdsklfjsdfkl")
+                console.log(err, "sladklksdfajdsklfjsdfkl")
             }
         }
         fetchpropertydata()
