@@ -21,6 +21,7 @@ app.use(session({
 // Middlewares
 app.use(bodyParser.json())
 app.use(cookieParser());
+app.use(express.static(`views`))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use("/", appRouter)
 
