@@ -26,8 +26,6 @@
                         class="text-decoration-none text-dark">Logout</a></button>
             </div>
 
-            <img src="./assets/1667852644329544585-flower-nature-plant-beautiful-petals-colorful-flowers.jpg" alt="sdfsda">
-            <!-- <img src="https://th.bing.com/th/id/OIP.1YM53mG10H_U25iPjop83QHaEo?pid=ImgDet&rs=1" width="" alt="king"> -->
         </div>
     </nav>
     <!-- posts section -->
@@ -59,10 +57,10 @@
                     // console.log(data[i].roomImage[1])
                     const Maincard = document.createElement('div');
                     Maincard.classList.add("cards", "bg-light","col-sm-12", "col-md-6", "col-lg-3", "my-3");
-                    const card = `<a href="http://localhost:4000/property?id=${data[i].propertyId}" class="text-decoration-none text-black"><div class="img">
+                    const card = `<a href="http://localhost:4000/property?id=${data[i].propertyId}" class="text-decoration-none text-black "><div class="img">
                 <img class="card-img-top" src="./assets/${data[i].roomImage[1]}" alt="Card image cap">
             </div>
-            <div class="cards-detail my-2">
+            <div class="cards-detail px-2 rounded-3 my-2">
                 <div class="card-heading d-flex justify-content-between">
                     <h5 class="card-title">${data[i].propertyName}</h5>
                 </div>

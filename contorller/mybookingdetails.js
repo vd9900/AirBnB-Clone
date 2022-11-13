@@ -2,7 +2,11 @@ const path = require("path");
 
 
 function mybookingsdetailsGET(req, res) {
-    req.session.clickedbookedroomId = req.query.id
+    if(req.session.isAuth){
+        req.session.clickedbookedroomId = req.query.id
+    }else{
+        res.redirect("/login")
+    }
 
     res.sendFile(path.join(__dirname, "../views/bookingdeatils.html"))
 }

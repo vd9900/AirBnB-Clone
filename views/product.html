@@ -113,7 +113,7 @@
                 </div>
                 <!-- ratings -->
                 <div class="my-3 fs-3">
-                    Rating: 4.3/5
+                    Rating: <span id="rating"></span>/5
                 </div>
 
                 <!-- Amenities -->
@@ -234,6 +234,7 @@
         const outdoor = document.getElementById("outdoor")
         const essentials = document.getElementById("essentials")
         const images = document.getElementById("images")
+        const rating = document.getElementById("rating")
 
 
 
@@ -258,8 +259,17 @@
                 beds.innerHTML = data.total.Beds;
                 bedRooms.innerHTML = data.total.Bedrooms;
                 bathRooms.innerHTML = data.total.Bathrooms;
-                console.log(data);
-                console.log(data.roomImage);
+                console.log(reviewData);
+                // console.log(data.roomImage);
+                const realrating =  ()=>{
+                    let total_user_rated = reviewData.length;
+                    let total_rating =  reviewData[total_user_rated-1].totalrating;
+                    let sum_of_max_rating_of_user_count = total_user_rated * 5;
+                    return (total_rating * 5)/sum_of_max_rating_of_user_count;
+
+                }
+                console.log(realrating());
+                rating.innerText = realrating()
                 //fecthing amenitels
                 //indoor
                 images.innerHTML = `

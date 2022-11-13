@@ -1,7 +1,12 @@
 const path = require("path");
 
 function bookingconfGET(req, res) {
-    res.sendFile(path.join(__dirname, "../views/bookingconf.html"))
+    if(req.session.isAuth){
+
+        res.sendFile(path.join(__dirname, "../views/bookingconf.html"))
+    }else{
+        res.redirect("/login")
+    }
 }
 function bookingconfPOST(req, res) {
     console.log(req.body);

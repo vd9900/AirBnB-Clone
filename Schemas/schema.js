@@ -160,6 +160,8 @@ const BookedroomDetails = new mongoose.model("BookedroomDetails", bookedRoomDeta
 const reviewDetials = new mongoose.Schema({
     userName: String,
     propertyId: Number,
+    rating: Number,
+    totalrating: Number,
     Description: String,
     updated: {
         type: Date,

@@ -1,7 +1,11 @@
 const path = require("path");
 
 function mybookingsGET(req, res) {
-    res.sendFile(path.join(__dirname, "../views/mybookings.html"))
+    if(req.session.isAuth){
+        res.sendFile(path.join(__dirname, "../views/mybookings.html"))
+    }else{
+        res.redirect("/login")
+    }
 }
 
 module.exports = { mybookingsGET}
